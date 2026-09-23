@@ -1,0 +1,45 @@
+# 모델 설정 — 코드는 이 파일을 통해서만 모델 ID를 얻는다.
+# 절대 Python 코드나 프롬프트에 모델 ID를 직접 쓰지 않는다.
+#
+# 구조를 두 단으로 나눈 이유:
+#   tiers  — Anthropic이 모델을 교체하면 여기 한 줄만 고친다.
+#   roles  — 어떤 단계를 어느 급으로 볼지 재조정하고 싶으면 여기만 건드린다.
+# 두 결정이 섞이지 않게 하기 위함이다.
+
+tiers:
+  haiku:  claude-haiku-4-5-20251001
+  sonnet: claude-sonnet-5
+  opus:   claude-opus-5
+
+roles:
+  # trend-research 안에서 후보를 수집·구조화. 판단 거의 없음.
+  candidate_research: haiku
+
+  # 상위 후보에 대한 정성 점수(practicality, claude_fit, content)만 평가.
+  # 총점 합산은 scripts/score.py가 한다 — 모델이 계산하지 않는다.
+  candidate_scoring: sonnet
+
+  # extension-research. 여기서 나온 사실이 이후 모든 단계의 근거가 되므로
+  # 정확도가 가장 중요하다.
+  extension_research: opus
+
+  # write-review. 글 품질이 곧 블로그 품질.
+  write_review: opus
+
+  # fact-check의 최종 판정 (PASS/WARNING/FAIL).
+  fact_check: opus
+
+  # fact-check 내부에서 클레임 단위로 병렬 검증할 때 쓰는 서브에이전트
+  # (claim-verifier). 클레임 수가 많아 opus로 전부 돌리면 비용이 큼.
+  claim_verification: sonnet
+
+  # SEO 메타데이터 생성. 정형 작업.
+  seo: sonnet
+
+# --- 실행 스크립트가 지켜야 할 것 ---
+# 1. 각 단계 호출 전, 역할 이름 → tiers 값 → 실제 모델 ID 순으로 해석한다.
+# 2. 로그에는 requested_model(역할이 가리킨 티어 이름)과
+#    resolved_model(실제 모델 ID)을 둘 다 남긴다. 모델 교체 이력을
+#    추적하려면 둘 다 필요하다.
+# 3. 이 파일에 없는 역할 이름이 오면 실패시키고, 조용히 기본값으로
+#    넘어가지 않는다.

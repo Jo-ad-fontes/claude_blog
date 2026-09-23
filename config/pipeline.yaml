@@ -1,0 +1,60 @@
+# 파이프라인 동작 설정.
+# 표시된 값 다수가 잠정치다 (# TBD 주석 참고). 0주차 수작업 리뷰 결과를
+# 보기 전까지는 임의로 확정하지 않는다.
+
+scoring:
+  # 원안의 100점 배점을 그대로 유지.
+  weights:
+    popularity: 25
+    momentum: 20
+    practicality: 20
+    claude_fit: 15
+    automation: 10
+    difficulty: 5
+    content: 5
+
+  # 이 점수 미만이면 그날/그주는 발행을 건너뛴다. 억지로 채우지 않는다.
+  # TBD: 0주차에서 실제 후보 점수 분포를 본 뒤 확정.
+  min_total_score_to_publish: null
+
+publishing:
+  target_per_week: 3
+  categories_per_cycle: [skills, plugins, connectors]
+
+  # 완성본(READY_FOR_REVIEW 이상) 버퍼 목표. 이 아래로 떨어지면 생산을
+  # 늘리고, 이 위로 넘치면 발행량이 아니라 min_total_score_to_publish를
+  # 올려서 흡수한다.
+  queue_buffer_target: 12
+
+review:
+  # 게시 후 이 일수가 지나면 UPDATE_REQUIRED로 표시.
+  update_required_after_days: 90
+
+cost:
+  # 파이프라인 전용 Anthropic API 키에 걸어둘 값과는 별개로, 스크립트
+  # 자체에서도 상한을 확인해 초과 시 중단한다.
+  # TBD: data/costs.jsonl에 며칠치 실측이 쌓인 뒤 채운다.
+  stage_cap_usd: null
+  daily_cap_usd: null
+  per_article_alert_usd: null
+
+sandbox:
+  # docker run 하드닝 옵션. sandbox/run-sandbox.sh가 이 값을 읽어 적용.
+  timeout_seconds: 600
+  memory_limit: "2g"
+  cpu_limit: 2
+  pids_limit: 256
+  network: sandbox-net
+
+hooks:
+  # block-publish가 거부 대상으로 매칭하는 패턴. 정규식을 여기 모아두면
+  # hook 스크립트를 고치지 않고도 패턴을 추가할 수 있다.
+  publish_command_patterns:
+    - "wp-json"
+    - "publish\\.py"
+    - "wp[[:space:]]+post"
+    - "WORDPRESS_"
+  secret_path_patterns:
+    - "\\.env$"
+    - "\\.pem$"
+    - "credentials"

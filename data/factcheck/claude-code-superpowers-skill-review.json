@@ -1,0 +1,57 @@
+{
+  "slug": "claude-code-superpowers-skill-review",
+  "checked_at": "2026-09-22",
+  "verdict": "WARNING",
+  "claims_checked": 8,
+  "results": [
+    {
+      "claim": "obra/superpowers는 약 28만 개의 GitHub 스타와 2만 5천 개의 포크를 가진, Claude Code 생태계에서 가장 큰 프로젝트 중 하나다.",
+      "source_url": "https://github.com/obra/superpowers",
+      "verdict": "WARNING",
+      "evidence": "Live count as of 2026-09-22: 290,025 stars / 25,949 forks — grown since the claim was recorded (2026-09-18: ~280K/25K). The conclusion ('one of the largest projects in the ecosystem') is unaffected and if anything strengthened. Recommend updating the cited figures before publish."
+    },
+    {
+      "claim": "Superpowers는 하나의 Skill이 아니라, 브레인스토밍부터 TDD, 코드 리뷰, 브랜치 정리까지 개발 단계별로 자동 발동하는 Skill 라이브러리 전체를 설치하는 방식의 개발 방법론이다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README opens with 'Superpowers is a complete software development methodology... built on top of a set of composable skills' that 'trigger automatically'. Documented Basic Workflow (brainstorming -> git-worktrees -> writing-plans -> executing-plans -> test-driven-development -> requesting-code-review -> finishing-a-development-branch) matches the claimed arc."
+    },
+    {
+      "claim": "Anthropic의 공식 플러그인 마켓플레이스(claude-plugins-official)에 등재되어 있다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README's 'Official Marketplace' subsection states 'Install the plugin from Anthropic's official marketplace:' followed by `/plugin install superpowers@claude-plugins-official`."
+    },
+    {
+      "claim": "Claude Code 외에 Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, OpenCode 등에도 각각의 설치 경로를 지원한다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README contains dedicated install instructions for all eight named tools (Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, OpenCode). No discrepancies."
+    },
+    {
+      "claim": "제작자는 Jesse Vincent이며 Prime Radiant 소속이다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README states 'Superpowers is built by Jesse Vincent and the rest of the folks at Prime Radiant' with links to blog.fsck.com and primeradiant.com."
+    },
+    {
+      "claim": "\"superpowers\"라는 이름을 쓰는 저장소가 여러 개 있다 — thecodingrobot/superpowers는 obra/superpowers-skills를 런타임에 클론하는 별개의 shim 구조이고, abudhahir/superpowers는 VS Code/GitHub Copilot용의 완전히 무관한 도구이며, jsholmes/superpowers는 obra의 포크(스타 0개)다.",
+      "source_url": "https://github.com/obra/superpowers",
+      "verdict": "PASS",
+      "evidence": "Verified directly against the three named repos: thecodingrobot/superpowers's README confirms it clones obra/superpowers-skills to ~/.config/superpowers/skills/ at runtime; abudhahir/superpowers is 'SupremePower Active Engine (Phase 3)', an unrelated VS Code/Copilot extension; jsholmes/superpowers shows 'forked from obra/superpowers' with 0 stars/0 forks. NOTE: the recorded source_url (obra/superpowers itself) does not actually contain this evidence — it should cite the three individual repos instead. Facts confirmed true regardless; this is a citation-attribution issue for the research step, not a factual error."
+    },
+    {
+      "claim": "프로젝트는 새 Skill 기여를 받지 않으며 기존 Skill의 수정만 받는다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README states 'we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support'."
+    },
+    {
+      "claim": "선택적 사용량 원격 측정(telemetry)이 있으며 기본값은 켜져 있고 SUPERPOWERS_DISABLE_TELEMETRY 환경변수로 끌 수 있다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "verdict": "PASS",
+      "evidence": "README confirms the optional telemetry feature is on by default ('It's 100% optional... To disable this, set the environment variable SUPERPOWERS_DISABLE_TELEMETRY to any true value') with exact env var name matching. README also documents that Claude Code's own DISABLE_TELEMETRY / CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC opt-outs are honored as additional mechanisms — supplementary info, not a correctness issue."
+    }
+  ],
+  "unsourced_statements": []
+}

@@ -1,0 +1,84 @@
+{
+  "candidate_id": "obra-superpowers",
+  "name": "Superpowers",
+  "type": "skill",
+  "category": "skills",
+  "urls": {
+    "official": "https://github.com/obra/superpowers",
+    "github": "https://github.com/obra/superpowers"
+  },
+  "claims": [
+    {
+      "claim": "obra/superpowers는 약 28만 개의 GitHub 스타와 2만 5천 개의 포크를 가진, Claude Code 생태계에서 가장 큰 프로젝트 중 하나다.",
+      "source_url": "https://github.com/obra/superpowers",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "Superpowers는 하나의 Skill이 아니라, 브레인스토밍부터 TDD, 코드 리뷰, 브랜치 정리까지 개발 단계별로 자동 발동하는 Skill 라이브러리 전체를 설치하는 방식의 개발 방법론이다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "Anthropic의 공식 플러그인 마켓플레이스(claude-plugins-official)에 등재되어 있다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "Claude Code 외에 Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, OpenCode 등에도 각각의 설치 경로를 지원한다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "제작자는 Jesse Vincent이며 Prime Radiant 소속이다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "\"superpowers\"라는 이름을 쓰는 저장소가 여러 개 있다 — thecodingrobot/superpowers는 obra/superpowers-skills를 런타임에 클론하는 별개의 shim 구조이고, abudhahir/superpowers는 VS Code/GitHub Copilot용의 완전히 무관한 도구이며, jsholmes/superpowers는 obra의 포크(스타 0개)다.",
+      "source_url": "https://github.com/obra/superpowers",
+      "source_kind": "community",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "프로젝트는 새 Skill 기여를 받지 않으며 기존 Skill의 수정만 받는다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    },
+    {
+      "claim": "선택적 사용량 원격 측정(telemetry)이 있으며 기본값은 켜져 있고 SUPERPOWERS_DISABLE_TELEMETRY 환경변수로 끌 수 있다.",
+      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-09-18"
+    }
+  ],
+  "install_commands": [
+    "/plugin install superpowers@claude-plugins-official",
+    "/plugin marketplace add obra/superpowers-marketplace",
+    "/plugin install superpowers@superpowers-marketplace"
+  ],
+  "hands_on_test": {
+    "tested_at": "2026-09-18",
+    "claude_code_version": "2.1.276",
+    "os": "Windows",
+    "observations": [
+      "/plugin install superpowers@claude-plugins-official 실행 시 '✓ Installed superpowers. Plugin is now active.' 메시지와 함께 수 초 내에 설치 완료. 에러 없음.",
+      "초안에서 README 인용이라고 썼던 '/superpowers:brainstorm, /superpowers:write-plan, /superpowers:execute-plan' 세 개짜리 명령어 설명은 실제 공식 저장소 문서가 아니라 다른 포크의 README에서 잘못 가져온 것이었다. 실제 /help 출력은 12개 스킬 각각이 자기 이름 그대로 슬래시 명령어가 되는 구조다 (예: /superpowers:brainstorming, /superpowers:test-driven-development 등).",
+      "슬래시 명령어 없이 사소한 단일 함수 작업(cycloid 함수 만들기)을 요청했을 때는 가벼운 질문 하나만 하고 바로 구현했다 — RED-GREEN-REFACTOR 패턴은 나타나지 않았다.",
+      "슬래시 명령어 없이 개방형 아키텍처 작업(file upload API 만들기)을 요청했을 때는 도구 호출 배너에 'Skill(superpowers:brainstorming) → Successfully loaded skill'이 명시적으로 떴고, 저장소의 CLAUDE.md를 읽어 이 요청이 문서화된 파이프라인과 안 맞는다는 것까지 파악한 뒤 목적을 묻는 구조화된 질문을 했다.",
+      "TDD, code-review, git-worktree 단계는 이번 테스트에서 확인하지 않았다."
+    ]
+  },
+  "watch_outs": [
+    "'superpowers'라는 이름의 저장소가 여러 개다 — 설치 전 obra/superpowers인지, 스타 수(28만)가 맞는지 확인해야 한다.",
+    "새 Skill 기여를 받지 않는 거버넌스라, 워크플로가 안 맞으면 포크하는 것 외에 선택지가 없다.",
+    "기본값으로 켜진 원격 측정이 있다 (SUPERPOWERS_DISABLE_TELEMETRY로 끌 수 있음).",
+    "메인 저장소에 버전 태그/릴리스가 눈에 띄지 않는다 — extension_version 확정 필요.",
+    "자동 발동은 사소한 일회성 작업에는 약하게, 개방형 기능 작업에는 뚜렷하게 나타났다 — '모든 요청에 발동'이 아니다."
+  ]
+}
