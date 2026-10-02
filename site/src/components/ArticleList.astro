@@ -1,0 +1,39 @@
+---
+import { CATEGORY_LABELS } from '../lib/categories';
+import { formatDate, type Article } from '../lib/articles';
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+---
+
+{
+  articles.length === 0 ? (
+    <p class="empty">No articles yet.</p>
+  ) : (
+    <ul class="article-list">
+      {articles.map((a) => (
+        <li>
+          <a href={`/${a.data.slug}/`}>{a.data.title}</a>
+          <p class="meta">
+            <a href={`/category/${a.data.category}/`}>{CATEGORY_LABELS[a.data.category]}</a> · Tested{' '}
+            <time datetime={formatDate(a.data.tested_at)}>{formatDate(a.data.tested_at)}</time>
+          </p>
+          <p class="summary">{a.data.meta_description}</p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .article-list { list-style: none; padding: 0; margin: 0; }
+  .article-list li { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .article-list li > a { font-size: 1.15em; font-weight: 600; color: var(--fg); text-decoration: none; }
+  .article-list li > a:hover { color: var(--accent); }
+  .meta { margin: 4px 0 0; }
+  .meta a { color: inherit; }
+  .summary { margin: 6px 0 0; }
+</style>

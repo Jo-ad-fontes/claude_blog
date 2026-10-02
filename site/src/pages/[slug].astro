@@ -1,0 +1,52 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { CATEGORY_LABELS } from '../lib/categories';
+import { formatDate, getArticles, type Article } from '../lib/articles';
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  return articles.map((article) => ({ params: { slug: article.data.slug }, props: { article } }));
+}
+
+const { article } = Astro.props as { article: Article };
+const { data } = article;
+const { Content } = await render(article);
+const tested = formatDate(data.tested_at);
+---
+
+<Base title={data.seo_title} description={data.meta_description} lang={data.lang} ogType="article">
+  <Fragment slot="head">
+    <meta property="article:section" content={CATEGORY_LABELS[data.category]} />
+    {data.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+  </Fragment>
+  <article>
+    <header>
+      <h1>{data.title}</h1>
+      <p class="meta">
+        <a href={`/category/${data.category}/`}>{CATEGORY_LABELS[data.category]}</a> · Tested{' '}
+        <time datetime={tested}>{tested}</time> · Claude Code {data.claude_code_version}
+      </p>
+      {
+        data.tags.length > 0 && (
+          <ul class="tags">
+            {data.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  article > header { margin-bottom: 28px; }
+  .meta a { color: inherit; }
+  .tags { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags li { font-size: 0.8em; border: 1px solid var(--border); border-radius: 999px; padding: 1px 10px; color: var(--muted); }
+  .prose { overflow-wrap: anywhere; }
+</style>

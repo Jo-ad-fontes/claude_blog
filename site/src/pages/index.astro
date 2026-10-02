@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import ArticleList from '../components/ArticleList.astro';
+import { getArticles } from '../lib/articles';
+
+const articles = await getArticles();
+---
+
+<Base
+  title="ExtensionLog — Hands-on Claude Code Extension Reviews"
+  description="Tested reviews of Claude Code Skills, Plugins, and Connectors, with install logs, versions, and real-world behavior notes."
+>
+  <h1>Latest articles</h1>
+  <ArticleList articles={articles} />
+</Base>

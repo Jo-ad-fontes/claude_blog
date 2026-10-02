@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { CATEGORIES, CATEGORY_LABELS, type Category } from '../../lib/categories';
+import { getArticles } from '../../lib/articles';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((category) => ({ params: { category } }));
+}
+
+const category = Astro.params.category as Category;
+const label = CATEGORY_LABELS[category];
+const articles = (await getArticles()).filter((a) => a.data.category === category);
+---
+
+<Base
+  title={`${label} — ExtensionLog`}
+  description={`Hands-on reviews and notes in the ${label} category on ExtensionLog.`}
+>
+  <h1>{label}</h1>
+  <ArticleList articles={articles} />
+</Base>
