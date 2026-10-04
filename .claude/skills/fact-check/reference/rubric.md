@@ -19,6 +19,8 @@
   community인지 경계)
 - 출처는 맞지만 더 최신 정보가 다른 곳에 있는 것으로 보임
 
+`source_kind` 분류 규칙: Anthropic 등 벤더가 직접 운영하는 마켓플레이스 등재 페이지·매니페스트는 `official_docs`.
+
 예: 초안 작성 시점엔 "25,000 포크"였는데 지금 다시 보니 "25,400 포크" → WARNING,
 FAIL 아님. 사람이 숫자만 갱신하면 됨.
 
@@ -62,3 +64,15 @@ write-review 단계에서 별-수·포크·다운로드 수처럼 계속 변하�
 **write-review가 잘못한 것 vs 세상이 바뀐 것**도 구분해서 `unsourced_statements`와
 `results`에 각각 남긴다. 전자는 Skill 설계를 고쳐야 할 신호이고, 후자는 그냥
 초안을 갱신하면 되는 신호다 — 원인이 다르면 조치도 다르다.
+
+## 사람이 수용한 WARNING 기록 방법
+
+사람이 WARNING을 검토하고 수용하면, verdict를 바꾸지 않고 다음처럼 기록한다.
+FAIL은 이 방식으로 수용하지 않는다.
+
+- `data/factcheck/<slug>.json`의 해당 `results` 항목에 `human_decision: "accepted"`,
+  `decided_by`, `decided_at`(YYYY-MM-DD), `rationale`을 추가한다.
+- 초안 front matter의 `fact_check.verdict`는 `"WARNING"` 그대로 두고,
+  `fact_check.accepted_warnings`에 `claim`, `decided_by`, `decided_at`, `rationale`을 요약한다.
+- 모든 WARNING이 수용된 경우에만, 사람의 결정에 따른 예외로 `status`를
+  `READY_FOR_REVIEW`로 올릴 수 있다. 사람의 결정 없이 올리지 않는다.

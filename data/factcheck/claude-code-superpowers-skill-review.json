@@ -1,61 +1,89 @@
 {
   "slug": "claude-code-superpowers-skill-review",
-  "checked_at": "2026-09-23",
-  "verdict": "PASS",
-  "claims_checked": 8,
+  "checked_at": "2026-10-04",
+  "verdict": "WARNING",
+  "claims_checked": 10,
   "results": [
     {
       "claim": "obra/superpowers is one of the largest projects in the Claude Code ecosystem: 280,000+ GitHub stars and 25,000+ forks (as of September 2026).",
       "source_url": "https://github.com/obra/superpowers",
       "verdict": "PASS",
-      "evidence": "Re-fetched the live repo (2026-09-23): ~290,300 stars, ~26,000 forks — both above the stated thresholds (280,000+/25,000+). Per the project's rubric (threshold claims PASS as long as the live value still meets or exceeds the floor), natural growth is not grounds for WARNING."
+      "evidence": "Re-fetched 2026-10-04: about 295,000 stars, about 26,400 forks (rounded by the fetch summary). Both above the thresholds. 'One of the largest projects in the Claude Code ecosystem' is a relative judgment the page does not state."
     },
     {
       "claim": "Superpowers는 하나의 Skill이 아니라, 브레인스토밍부터 TDD, 코드 리뷰, 브랜치 정리까지 개발 단계별로 자동 발동하는 Skill 라이브러리 전체를 설치하는 방식의 개발 방법론이다.",
       "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
-      "verdict": "PASS",
-      "evidence": "README describes itself as 'a complete software development methodology... built on top of a set of composable skills' with documented auto-triggering at each stage: brainstorming (before code), TDD (RED-GREEN-REFACTOR), code review (between tasks), branch cleanup (on completion)."
+      "verdict": "WARNING",
+      "warning_type": "wording_interpretation",
+      "evidence": "README: 'a complete software development methodology for your coding agents, built on top of a set of composable skills'; 'The agent checks for relevant skills before any task. Mandatory workflows, not suggestions.'; seven workflow stages (Brainstorming, Git Worktrees, Writing Plans, Implementation, TDD, Code Review, Branch Completion). Core content matches. Wording differences only: README says 'composable skills', the claim says 'Skill library'; 'installing the whole library' is inferred from per-harness install instructions; '브랜치 정리' narrows README's 'Branch Completion' (final verification and merge decision). The previous run rated this same claim PASS; the difference is verifier strictness, not new evidence.",
+      "human_decision": "accepted",
+      "decided_by": "user",
+      "decided_at": "2026-10-04",
+      "rationale": "README의 'composable skills'를 'skill library'로 옮긴 표현 차이이며 의미는 같다. 직전 실행은 PASS였다."
     },
     {
       "claim": "Anthropic의 공식 플러그인 마켓플레이스(claude-plugins-official)에 등재되어 있다.",
-      "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
+      "source_url": [
+        "https://github.com/obra/superpowers/blob/main/README.md",
+        "https://claude.com/plugins/superpowers"
+      ],
       "verdict": "PASS",
-      "evidence": "README documents `/plugin install superpowers@claude-plugins-official` under an 'Official Marketplace' section, distinguished from the separate community marketplace. Independently confirmed claude-plugins-official = anthropics/claude-plugins-official, Anthropic's official-managed plugin directory."
+      "evidence": "README says Superpowers is available via the official Claude plugin marketplace with `/plugin install superpowers@claude-plugins-official`; claude.com/plugins/superpowers is the marketplace listing (author Jesse Vincent, source github.com/obra/superpowers.git). The identifier string `claude-plugins-official` comes from the README install command, not the listing page. The listing shows no 'Anthropic verified' badge (other entries have it), so the claim must stay at 'listed'; it does."
     },
     {
       "claim": "Claude Code 외에 Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, OpenCode 등에도 각각의 설치 경로를 지원한다.",
       "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
       "verdict": "PASS",
-      "evidence": "README has individual install instructions for all eight named tools. README also lists further tools (Devin CLI, Factory Droid, Pi, Qwen Code, Hermes, Muse) not named in the claim, but the claim's '등' (etc.) already signals a non-exhaustive list."
+      "evidence": "README has separate install sections for each named tool (Codex split into App/CLI, Grok as 'Grok Build CLI') plus Devin CLI, Factory Droid, Pi, Qwen Code, Hermes Agent, Muse, consistent with '등'."
     },
     {
-      "claim": "제작자는 Jesse Vincent이며 Prime Radiant 소속이다.",
+      "claim": "Superpowers는 Jesse Vincent와 Prime Radiant 팀이 만들었다.",
       "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
       "verdict": "PASS",
-      "evidence": "README's Community section: 'Superpowers is built by Jesse Vincent and the rest of the folks at Prime Radiant.'"
+      "evidence": "README: 'Superpowers is built by Jesse Vincent and the rest of the folks at Prime Radiant.'"
     },
     {
-      "claim": "\"superpowers\"라는 이름을 쓰는 저장소가 여러 개 있다 — thecodingrobot/superpowers는 obra/superpowers-skills를 런타임에 클론하는 별개의 shim 구조이고, abudhahir/superpowers는 VS Code/GitHub Copilot용의 완전히 무관한 도구이며, jsholmes/superpowers는 obra의 포크(스타 0개)다.",
-      "source_url": [
-        "https://github.com/thecodingrobot/superpowers",
-        "https://github.com/abudhahir/superpowers",
-        "https://github.com/jsholmes/superpowers"
-      ],
+      "claim": "thecodingrobot/superpowers는 obra/superpowers-skills를 런타임에 클론해 쓰는 플러그인이며, GitHub에는 obra/superpowers의 fork로 표시된다.",
+      "source_url": "https://github.com/thecodingrobot/superpowers",
       "verdict": "PASS",
-      "evidence": "All three sub-claims re-verified: thecodingrobot/superpowers is a shim cloning superpowers-skills to ~/.config/superpowers/skills/; abudhahir/superpowers is a separate VS Code/GitHub Copilot workflow engine; jsholmes/superpowers is 'forked from obra/superpowers' with 0 stars, unchanged. No drift found."
+      "evidence": "Page shows 'forked from obra/superpowers'; README Architecture section says it clones/updates obra/superpowers-skills into ~/.config/superpowers/skills/. Not archived."
     },
     {
-      "claim": "프로젝트는 새 Skill 기여를 받지 않으며 기존 Skill의 수정만 받는다.",
+      "claim": "abudhahir/superpowers는 VS Code, 터미널 CLI, GitHub Copilot 사이에서 상태를 동기화하는 워크플로 도구이며, 저장소 설명에는 Claude Code skills library가 언급되어 있다.",
+      "source_url": "https://github.com/abudhahir/superpowers",
+      "verdict": "PASS",
+      "evidence": "About text: 'Claude Code superpowers: core skills library'. README describes an Active Workflow Engine syncing JSON state among VS Code (sidebar/chat), terminal CLI and GitHub Copilot (dynamic instructions). Not a fork."
+    },
+    {
+      "claim": "jsholmes/superpowers는 obra/superpowers를 줄인 fork다.",
+      "source_url": "https://github.com/jsholmes/superpowers",
+      "verdict": "PASS",
+      "evidence": "Page shows 'forked from obra/superpowers'; README calls it a 'stripped-down fork', keeping three skills."
+    },
+    {
+      "claim": "README에 따르면 새 Skill 기여는 일반적으로 받지 않으며, Skill 업데이트는 지원하는 모든 코딩 에이전트에서 동작해야 한다.",
       "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
       "verdict": "PASS",
-      "evidence": "README: 'we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.'"
+      "evidence": "README: 'we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support'."
     },
     {
-      "claim": "brainstorming skill의 선택적 visual companion 기능이 로고 이미지를 Prime Radiant 서버에서 불러오며 Superpowers 버전 정보만 전송한다 (프로젝트·프롬프트·코딩 에이전트 정보는 포함되지 않음). 기본값은 켜져 있고 SUPERPOWERS_DISABLE_TELEMETRY 환경변수로 끌 수 있다.",
+      "claim": "brainstorming skill의 선택적 visual companion 기능이 로고 이미지를 프로젝트 웹사이트에서 불러오며 Superpowers 버전 정보만 전송한다 (프로젝트·프롬프트·코딩 에이전트 정보는 포함되지 않음). 기본값은 켜져 있고 SUPERPOWERS_DISABLE_TELEMETRY 환경변수로 끌 수 있다.",
       "source_url": "https://github.com/obra/superpowers/blob/main/README.md",
-      "verdict": "PASS",
-      "evidence": "README: the Prime Radiant logo on brainstorming's optional visual companion loads from their site and 'includes the version of Superpowers in use' but 'does not include any details about your project, prompt, or coding agent.' On by default; SUPERPOWERS_DISABLE_TELEMETRY disables it. Scope, data sent, default-on state, and env var all match exactly — reconfirmed after the claim was narrowed from an earlier overbroad 'general usage telemetry' phrasing."
+      "verdict": "WARNING",
+      "warning_type": "wording_interpretation",
+      "evidence": "README: the Prime Radiant logo on brainstorming's optional visual companion 'is loaded from our website'; 'It includes the version of Superpowers in use. It does not include any details about your project, prompt, or coding agent.'; disable with SUPERPOWERS_DISABLE_TELEMETRY set to any true value; '100% optional'. Core content matches and 'website' now matches the README. This run's verifier said 'default on' is inferred from the 'To disable this, set...' wording and that the claim omits the Claude Code DISABLE_TELEMETRY / CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC opt-outs. Earlier runs' verifiers quoted the README as saying 'By default, the Prime Radiant logo ... is loaded from our website', i.e. default-on is stated; the fetch summaries are inconsistent across runs.",
+      "human_decision": "accepted",
+      "decided_by": "user",
+      "decided_at": "2026-10-04",
+      "rationale": "README 원문(raw, 2026-10-04 curl)에 'By default, the Prime Radiant logo on brainstorming's optional visual companion feature is loaded from our website.'가 명시되어 있음을 직접 확인했다. Claude Code 자체 옵트아웃(DISABLE_TELEMETRY 등) 언급이 빠진 것은 오류가 아니라 생략이다."
     }
   ],
-  "unsourced_statements": []
+  "unsourced_statements": [],
+  "notes": [
+    "Verdicts are the claim-verifier agents' verdicts, unchanged. All verifier source checks relied on WebFetch summaries, not a line-by-line read of raw pages. The overall verdict stays WARNING; the two WARNINGs were accepted by the user (see human_decision on those results).",
+    "Direct check by the orchestrating session (not a verifier verdict), 2026-10-04: the raw README (curl, raw.githubusercontent.com/obra/superpowers/main/README.md) section 'Visual companion telemetry' states 'By default, the Prime Radiant logo on brainstorming's optional visual companion feature is loaded from our website. It includes the version of Superpowers in use...' and 'To disable this, set the environment variable SUPERPOWERS_DISABLE_TELEMETRY to any true value. Superpowers also honors Claude Code's DISABLE_TELEMETRY and CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC opt-outs.' This resolves the verifier's doubt that default-on was only inferred.",
+    "Direct check by the orchestrating session, 2026-10-04: the raw marketplace.json (curl, 189,668 bytes) contains `\"name\": \"superpowers\"` with source url https://github.com/obra/superpowers.git at lines 3829-3837. The marketplace claim's source_url points to the README and claude.com/plugins/superpowers because verifiers could not read the large manifest without truncation; a WebFetch summary of that manifest wrongly reported no superpowers entry, so WebFetch summaries of large files should not be trusted for absence claims.",
+    "Hands-on statements (install result, slash commands, auto-trigger behavior, extension_version 6.4.1 as reported by /plugin on 2026-10-04) come from hands_on_test.observations and are exempt from external verification.",
+    "Scan of the draft for wording that could read as Anthropic endorsement found none: 'listed in Anthropic's official plugin marketplace' stays at 'listed'; other 'official' mentions refer to an install command and the project's own docs."
+  ]
 }
