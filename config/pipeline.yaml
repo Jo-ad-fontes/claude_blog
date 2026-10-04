@@ -50,10 +50,8 @@ hooks:
   # block-publish가 거부 대상으로 매칭하는 패턴. 정규식을 여기 모아두면
   # hook 스크립트를 고치지 않고도 패턴을 추가할 수 있다.
   publish_command_patterns:
-    - "wp-json"
-    - "publish\\.py"
-    - "wp[[:space:]]+post"
-    - "WORDPRESS_"
+    - "git[[:space:]]+push"
+    - "articles/published/"
   secret_path_patterns:
     - "\\.env$"
     - "\\.pem$"

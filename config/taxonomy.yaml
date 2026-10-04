@@ -1,16 +1,14 @@
-# 카테고리·태그는 자동 생성하지 않는다.
-# 사람이 WordPress 관리자에서 먼저 만들고, 여기에 term ID를 채운다.
-# upload_draft.py는 이 매핑에 없는 이름을 요청받으면 실패한다
-# (조용히 새로 만들지 않는다).
-#
-# WordPress 구축(1주차) 직후, 아래 카테고리를 실제로 만들고 ID를 채워 넣는다.
+# 카테고리 slug 목록. 글 front matter의 `category`는 여기 있는 값만 쓴다.
+# 새 카테고리는 자동 생성하지 않는다. 사람이 이 파일과
+# site/src/lib/categories.ts(사이트가 실제로 읽는 목록)에 함께 추가한다.
+# 사이트 코드는 이 파일을 읽지 않으므로 두 목록을 수동으로 일치시켜야 한다.
 
 categories:
-  skills: 2
-  plugins: 3
-  connectors: 4
-  building-this-blog: 5
+  - skills
+  - plugins
+  - connectors
+  - building-this-blog
 
 # 태그는 초기에는 비워두고, 실제로 반복해서 쓰이는 것만 추가한다.
 # (예: claude-code, mcp, hooks, subagents 등 — 0주차 이후 결정)
-tags: {}
+tags: []

@@ -1,7 +1,7 @@
 ---
 slug: "claude-code-superpowers-skill-review"
-status: DRAFT
-title: "Superpowers for Claude Code: A Hands-On Review of the 280K-Star Skill Library"
+status: READY_FOR_REVIEW
+title: "Superpowers for Claude Code: A Hands-On Review of the 280K+-Star Skill Library"
 seo_title: "Superpowers for Claude Code — Review & Install Guide"
 meta_description: "A hands-on review of obra/superpowers, the Claude Code skill library covering brainstorming, TDD, code review, and more — install test and behavior notes."
 primary_keyword: "Superpowers Claude Code"
@@ -19,16 +19,12 @@ claude_code_version: "2.1.276"
 extension_version: null  # UNVERIFIED: no version tag or release found on the main repo at research time; needs confirmation before publish
 os: "Windows"
 fact_check:
-  verdict: "WARNING"
-  checked_at: "2026-09-22"
-  issues:
-    - "Star/fork counts drifted since research (2026-09-18: ~280K stars/25K forks -> 2026-09-22 live: 290,025 stars/25,949 forks). Conclusion unaffected; update figures before publish."
-    - "Name-collision claim's source_url in research JSON points to obra/superpowers itself, not the three repos it actually describes (thecodingrobot/superpowers, abudhahir/superpowers, jsholmes/superpowers). Facts confirmed true against those repos directly, but the citation should be corrected at the research step."
+  verdict: "PASS"
+  checked_at: "2026-09-23"
+  issues: []
 sources:
   - "https://github.com/obra/superpowers"
   - "https://github.com/obra/superpowers/blob/main/README.md"
-wp_post_id: null
-published_url: null
 cost_usd: 0
 ---
 
@@ -38,7 +34,7 @@ Superpowers isn't a single Claude Code skill — it's an entire development-meth
 
 ## 2. Why it matters
 
-obra/superpowers is one of the largest projects in the Claude Code ecosystem: roughly 280,000 GitHub stars and 25,000 forks. It's listed in Anthropic's official plugin marketplace (`claude-plugins-official`), and its install paths extend beyond Claude Code to Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, and OpenCode. The project is maintained by Jesse Vincent of Prime Radiant.
+obra/superpowers is one of the largest projects in the Claude Code ecosystem: 280,000+ GitHub stars and 25,000+ forks (as of September 2026). It's listed in Anthropic's official plugin marketplace (`claude-plugins-official`), and its install paths extend beyond Claude Code to Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, and OpenCode. The project is maintained by Jesse Vincent of Prime Radiant.
 
 ## 3. A name collision worth flagging
 
@@ -48,7 +44,7 @@ Several repositories use the name "superpowers," and they are not interchangeabl
 - **abudhahir/superpowers** is an unrelated tool built for VS Code / GitHub Copilot.
 - **jsholmes/superpowers** is a fork of obra's repo with 0 stars.
 
-If you're searching for this project, confirm you're looking at `obra/superpowers` and that the star count (~280K) matches before installing.
+If you're searching for this project, confirm you're looking at `obra/superpowers` and that the star count (280K+) matches before installing.
 
 ## 4. Key features
 
@@ -56,7 +52,7 @@ If you're searching for this project, confirm you're looking at `obra/superpower
 - Listed in Anthropic's official plugin marketplace (`claude-plugins-official`).
 - Install paths documented for multiple AI coding tools beyond Claude Code (Antigravity, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, Kimi Code, OpenCode).
 - Governance is closed to new skills: the project accepts modifications to existing skills but not new skill contributions.
-- Ships with opt-out usage telemetry, enabled by default and disabled via the `SUPERPOWERS_DISABLE_TELEMETRY` environment variable.
+- The brainstorming skill's optional "visual companion" loads a logo image from Prime Radiant's server and reports only the Superpowers version (no project, prompt, or agent data) — on by default, disabled via the `SUPERPOWERS_DISABLE_TELEMETRY` environment variable.
 
 ## 5. Installation
 
@@ -98,7 +94,7 @@ Tested 2026-09-18 on Claude Code 2.1.276, Windows.
 
 - Multiple unrelated repositories share the name "superpowers" — verify you're installing `obra/superpowers` and that the star count matches before proceeding.
 - The project does not accept new skill contributions, only modifications to existing ones. If your workflow needs a skill that doesn't exist yet, forking is the only option.
-- Usage telemetry is enabled by default; disable it with `SUPERPOWERS_DISABLE_TELEMETRY` if that matters to you.
+- The brainstorming skill's visual companion phones home a version number by default (not project/prompt/agent data); disable it with `SUPERPOWERS_DISABLE_TELEMETRY` if that matters to you.
 - No version tag or release was visible on the main repository at research time — the exact version installed could not be pinned down.
 - Auto-triggering is inconsistent by design: it was weak-to-absent on a small, single-function task and clearly visible on an open-ended architecture task. Don't expect it to fire on every request.
 
@@ -111,7 +107,7 @@ No. In this test, it triggered visibly (with a tool-call banner) on an open-ende
 No. `thecodingrobot/superpowers`, `abudhahir/superpowers`, and `jsholmes/superpowers` are all different projects (a runtime shim, an unrelated VS Code/Copilot tool, and a low-activity fork, respectively). Confirm you're on `obra/superpowers` before installing.
 
 **Does it phone home?**
-It has optional usage telemetry that's on by default. Set `SUPERPOWERS_DISABLE_TELEMETRY` to turn it off.
+Only in one narrow spot: the brainstorming skill's optional visual companion loads a logo image from Prime Radiant's server and sends the Superpowers version number (no project, prompt, or agent data). It's on by default — set `SUPERPOWERS_DISABLE_TELEMETRY` to turn it off.
 
 **Can I contribute a new skill to the project?**
 Not directly — the project currently only accepts modifications to existing skills, not new skill submissions.

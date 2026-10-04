@@ -42,6 +42,12 @@ write-review가 조사 JSON을 벗어나지 않으려고 노력했다는 것과,
 매칭된 claim들을 `claim-verifier` 서브에이전트에 하나씩 맡긴다 (Task 도구로
 동시에 여러 개 dispatch — 순차로 하지 않는다, 시간 낭비다). 각 결과를 모은다.
 
+**판정 규칙(문턱값 처리 등)을 프롬프트에 다시 설명하지 말고, `reference/rubric.md`
+경로를 그대로 알려주고 직접 읽게 한다.** claim-verifier는 프롬프트에 적힌
+규칙 설명을 검증 안 된 지시로 취급하고 의심할 수 있다(실제로 2026-09-22
+재검증에서 이런 일이 있었다 — 결과적으로는 옳게 동작했지만 재조회가 한 번
+더 필요했다). 규칙의 출처를 파일로 직접 가리키면 이 왕복이 없어진다.
+
 ### 4. 종합 판정
 
 - FAIL이 하나라도 있으면 → 전체 `verdict: FAIL`
@@ -82,7 +88,7 @@ fact_check:
 
 ### 상태(status) 전이
 
-- **PASS** → `status: READY_FOR_REVIEW`로 올린다 (다음은 WordPress 업로드 단계)
+- **PASS** → `status: READY_FOR_REVIEW`로 올린다 (다음은 사람 리뷰/PR 단계)
 - **WARNING** → `status: DRAFT` 그대로 둔다. issues에 뭘 봐야 하는지 남기고
   사람 판단에 맡긴다.
 - **FAIL** → `status: DRAFT` 그대로 둔다. **해당 문장 바로 위에
@@ -103,4 +109,4 @@ fact_check:
 
 verdict와, FAIL/WARNING이 있으면 몇 개인지 사람에게 한 줄로 보고한다.
 PASS면 "READY_FOR_REVIEW로 올렸다"고 명시한다 — 사람이 다음 단계
-(WordPress 업로드)로 넘어갈 준비가 됐다는 걸 알아야 한다.
+(리뷰/PR)로 넘어갈 준비가 됐다는 걸 알아야 한다.

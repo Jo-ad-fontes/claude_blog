@@ -28,8 +28,6 @@ fact_check:
   checked_at: null
   issues: []
 sources: []               # claims의 source_url을 그대로 모아서 넣는다
-wp_post_id: null
-published_url: null
 cost_usd: 0
 ---
 ```
@@ -42,6 +40,12 @@ cost_usd: 0
 ### 2. Why it matters
 인지도·모멘텀 근거를 구체적 숫자로. "인기 있다"가 아니라 "스타 28만 개"처럼.
 (원안의 "왜 주목할 만한가")
+
+**변동성 있는 숫자(스타 수, 포크 수, 다운로드 수)는 정확한 스냅샷이 아니라
+"28만 개 이상"처럼 문턱값으로 쓴다.** "290,025개"라고 정확히 쓰면 다음 날 숫자가
+바뀌어서 fact-check가 영원히 WARNING을 낸다 — 2026-09-22 superpowers 리뷰에서
+실제로 겪은 문제다. 정확한 숫자가 필요한 건 오직 버전 번호, 날짜, 출시일처럼
+자연적으로 안 늘어나는 값뿐이다.
 
 ### 3. A name collision / caution worth flagging (해당될 때만)
 동명 프로젝트, 흔한 오해, 검색했을 때 헷갈리는 것들. **claims에 근거가 있을 때만 쓴다.**
