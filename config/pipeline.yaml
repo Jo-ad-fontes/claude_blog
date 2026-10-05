@@ -46,13 +46,8 @@ sandbox:
   pids_limit: 256
   network: sandbox-net
 
-hooks:
-  # block-publish가 거부 대상으로 매칭하는 패턴. 정규식을 여기 모아두면
-  # hook 스크립트를 고치지 않고도 패턴을 추가할 수 있다.
-  publish_command_patterns:
-    - "git[[:space:]]+push"
-    - "articles/published/"
-  secret_path_patterns:
-    - "\\.env$"
-    - "\\.pem$"
-    - "credentials"
+hooks: {}
+  # hook 차단 패턴(게시 명령, 보호 경로, 시크릿 파일 이름)의 기준은
+  # .claude/hooks/lib/patterns.mjs 이다. 여기에 두면 Claude가 config/를 고쳐
+  # hook을 약화할 수 있어서 hook 디렉터리(보호 경로)로 옮겼다.
+  # 한계와 우회 가능성: tests/security/README.md
