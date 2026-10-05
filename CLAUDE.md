@@ -124,35 +124,39 @@ PUBLISHED → UPDATE_REQUIRED (90일 경과, tested_at 기준)
      → 작동 중. push는 사람이 직접 한다. (Claude에게 git push·Cloudflare
        자격증명을 주지 않는 것은 운영 규칙이며, 도구로 강제되지는 않는다.)
 2차: hook이 git push, main 직접 수정, articles/published/ 쓰기를 막는다
-     → 설계됨, 아직 미구현. .claude/hooks/ 스크립트와 settings.json 등록이
-       없으므로 지금은 아무것도 막지 않는다.
+     → 구현됨, 테스트 187건 통과, 알려진 우회 가능성은 문서 참조
+       (tests/security/README.md). 실수 방지 장치이지 보안 경계가 아니다.
 3차: GitHub main 브랜치 보호 (PR 필수, 관리자 우회 금지)
      → 사람이 GitHub 저장소 설정에서 직접 건다. 설정하기 전까지는 작동하지
        않는다. 코드로 강제할 수 없으며, 설정 여부는 사람이 확인한다.
 ```
 
-**지금 실제로 작동하는 방어는 1차(사람이 직접 push)와, 3차(GitHub 설정 후)뿐이다.**
-2차 hook은 구현·검증되기 전까지 방어로 계산하지 않는다. 구현되지 않은 방어를
-있는 것처럼 쓰지 않고, 하나를 "확인했으니 됐다"고 여기지 않는다. 2차가
-구현되면 hook이 실제로 막는지 확인하는 테스트를 `tests/security/`에 새로
-작성한다 (현재 테스트 없음).
+**진짜 경계는 1차(사람이 직접 push, Claude에게 자격증명을 주지 않음)와
+3차(GitHub 설정 후)다.** 2차 hook은 그 앞에서 실수를 줄이는 장치이며, 따옴표
+분할·변수 조합·스크립트 파일·다른 인터프리터 같은 우회는 막지 못한다
+(`tests/security/README.md`의 "알려진 우회 가능성"). 하나를 "확인했으니
+됐다"고 여기지 않는다. 2차의 hook 판정은 `tests/security/run.mjs`(`node`로
+실행)로 검증하고, `permissions.deny` 문법의 실제 동작은 아직 확인하지 못한
+항목이 README에 있다.
 
 ## Hooks — 우회를 시도하지 않는다
 
-**현재 상태: 설계됨, 아직 미구현.** `.claude/hooks/`와 hook 등록
-(`.claude/settings.json`)이 아직 없다. 아래 표는 구현 목표이며, 지금은 이
-hook들이 아무것도 막지 않는다. 구현 전에도 이 표의 항목을 Claude가 스스로
-지킨다.
+**현재 상태: 구현됨, 테스트 187건 통과, 알려진 우회 가능성은 문서 참조.**
+`.claude/hooks/`(Node `.mjs`)와 `.claude/settings.json`의 hook 등록·
+`permissions.deny`가 있다. 차단 패턴의 단일 기준은
+`.claude/hooks/lib/patterns.mjs`이고, 한계와 우회 가능성은
+`tests/security/README.md`에 있다. hook과 `settings.json`은 Claude가 수정할 수
+없다(변경은 사람이 한다).
 
-구현된 뒤에 hook이 어떤 작업을 막으면, 그건 설계된 동작이다. 다른 경로(예:
-다른 Bash 문법, 파일 간접 조작)로 우회하지 않는다.
+hook이 어떤 작업을 막으면, 그건 설계된 동작이다. 다른 경로(예: 다른 Bash
+문법, 파일 간접 조작)로 우회하지 않는다.
 
 | Hook | 막는 것 |
 |---|---|
-| `block-publish` | `git push`, `articles/published/` 쓰기·이동 (패턴은 `config/pipeline.yaml`의 `hooks.publish_command_patterns`) |
-| `block-secret-read` | `.env`, `*.pem`, `credentials*` 접근 |
-| `scope-guard` | `articles/`, `data/` 밖 쓰기. `articles/published/` 성격의 쓰기 |
-| `log-cost` | (차단 아님) 세션 비용을 `data/costs.jsonl`에 기록 |
+| `block-publish` | Bash/PowerShell: `git push/add/commit/merge/rebase`, `git reset --hard`, `gh pr merge`, 쓰기 성격의 `gh api`, `wrangler deploy/publish/versions upload`. 보호 경로로 파일을 쓰거나 옮기거나 지우는 명령 |
+| `block-secret-read` | `.env`, `.env.*`(`.env.example` 제외), `*.pem`, `credentials*` 접근 (파일 이름 기준) |
+| `scope-guard` | Write/Edit/NotebookEdit로 `articles/published/`, `.claude/hooks/`, `.claude/settings*.json`, `.mcp.json`, `.github/`, `.env` 쓰기 |
+| `log-cost` | (미구현, 보류) 세션 비용을 `data/costs.jsonl`에 기록. 구독 로그인이라 효용이 낮아 보류 |
 
 ## 모델 설정
 

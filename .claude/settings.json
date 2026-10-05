@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/.env.production)",
+      "Read(**/*.pem)",
+      "Read(**/credentials*)",
+      "Edit(**/.env)",
+      "Edit(**/.env.local)",
+      "Edit(**/.env.production)",
+      "Edit(/articles/published/**)",
+      "Edit(/.claude/hooks/**)",
+      "Edit(/.claude/settings*.json)",
+      "Edit(/.mcp.json)",
+      "Edit(/.github/**)",
+      "Bash(git push)",
+      "Bash(git push *)",
+      "Bash(git add)",
+      "Bash(git add *)",
+      "Bash(git commit)",
+      "Bash(git commit *)",
+      "Bash(git merge)",
+      "Bash(git merge *)",
+      "Bash(git rebase)",
+      "Bash(git rebase *)",
+      "Bash(git reset --hard)",
+      "Bash(git reset --hard *)",
+      "Bash(gh pr merge)",
+      "Bash(gh pr merge *)",
+      "Bash(gh api *)",
+      "Bash(wrangler deploy)",
+      "Bash(wrangler deploy *)",
+      "Bash(wrangler publish)",
+      "Bash(wrangler publish *)",
+      "Bash(wrangler versions upload)",
+      "Bash(wrangler versions upload *)",
+      "Bash(wrangler pages deploy *)",
+      "Bash(wrangler pages publish *)",
+      "Bash(npx wrangler deploy *)",
+      "Bash(npx wrangler publish *)",
+      "Bash(npx wrangler versions upload *)",
+      "Bash(npx wrangler pages deploy *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-publish.mjs\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|Read|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-secret-read.mjs\""
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/scope-guard.mjs\""
+          }
+        ]
+      }
+    ]
+  }
+}
