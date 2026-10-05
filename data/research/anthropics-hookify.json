@@ -1,0 +1,172 @@
+{
+  "candidate_id": "anthropics-hookify",
+  "name": "hookify",
+  "type": "plugin",
+  "category": "plugins",
+  "urls": {
+    "official": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+    "github": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify"
+  },
+  "claims": [
+    {
+      "claim": "hookify는 대화 패턴 분석이나 명시적 지시로 '원치 않는 동작을 막는 규칙(훅)'을 만들어 주는 플러그인이다. 규칙은 .claude/hookify.*.local.md 형태의 YAML front matter 마크다운 파일이고, event는 bash/file/stop/prompt/all, action은 warn 또는 block이다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "README의 명령은 /hookify, /hookify:list, /hookify:configure, /hookify:help 이고, 규칙은 재시작 없이 즉시 적용된다고 적혀 있다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "README상 Python 3.7 이상이 필요하고 의존성은 표준 라이브러리뿐이며, README는 라이선스를 MIT로 적었다. 그러나 같은 폴더의 LICENSE 파일은 Apache License 2.0 전문이라 어느 쪽이 적용되는지 알 수 없다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "hookify는 Anthropic 공식 마켓플레이스 매니페스트(marketplace.json)에 등재돼 있다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "hookify가 들어 있는 claude-plugins-official 저장소는 37,000+ 스타, 4,000+ 포크이며 plugins/(Anthropic 제작)와 external_plugins/(파트너·커뮤니티)로 나뉜다. 이 수치는 모노레포 전체의 것이고 hookify 단독 수치가 아니다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "시험한 환경에서 설치된 hookify는 anthropic-plugin-directory 출처, Scope project, Author Anthropic, commit d182ca4였고, 구성은 명령 4개(configure/help/hookify/list), 에이전트 conversation-analyzer, 스킬 writing-rules, 훅 PreToolUse/PostToolUse/Stop/UserPromptSubmit이었다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "시험 환경(한국어 Windows, cp949)에서 이모지·한글이 든 규칙 파일은 읽기에 실패했고, 그 규칙은 건너뛰어져 명령이 경고·차단 없이 통과했다(fail-open). 훅 스크립트를 직접 실행하면 \"Malformed rule file ... 'cp949' codec can't decode byte 0xf0\" 오류와 함께 출력은 {} 종료코드 0이었다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "PYTHONUTF8=1 로 claude를 시작하면 같은 규칙이 실제 세션에서 차단·경고로 작동했다. 이모지·한글 없는 ASCII 규칙은 PYTHONUTF8 없이도 deny가 나왔다(훅 직접 실행 기준).",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "실제 세션에서 block 규칙은 PreToolUse에서 'Blocked by hook' 오류와 함께 명령을 실행하지 않고 파일을 유지했다. warn 규칙은 명령을 실행시켰고 경고는 PreToolUse와 PostToolUse에서 총 2회 표시됐다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "'dummy2.txt' 삭제를 막는 규칙은 rm dummy2.txt, rm ./dummy2.txt, rm -f dummy2.txt 를 차단했지만, 실제 세션에서 mv dummy2.txt gone.txt 는 통과해 gone.txt가 생성됐다. 훅 직접 실행 기준으로 rm *.txt 와 python3 -c \"import os; os.remove('dummy2.txt')\" 도 통과했다(파일은 건드리지 않음).",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "/hookify:help 출력 첫 문단은 hookify가 작은 마크다운 규칙으로 Claude의 원치 않는 동작을 차단·경고하게 해주며 사용자가 hooks.json을 직접 편집하지 않는다고 설명한다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "시험 PC에서 python, py, python3 모두 Python 3.14.7로 동작했고 훅은 python3로 실행됐다. 이 PC 한 대 기준이다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "설치된 커밋(d182ca4) 캐시에서도 LICENSE는 Apache License Version 2.0이고 README 338~340행은 '## License / MIT License'였다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "/plugin Marketplaces 화면에서 'Anthropic Directory'(Built in, 2484 available)와 'claude-plugins-official'(anthropics/claude-plugins-official, 315 available, 1 installed)는 별개의 마켓플레이스였다. 설치된 hookify의 출처 anthropic-plugin-directory는 앞쪽이며 '(no CLI name) · listed as Anthropic Directory'로 표시됐다. 두 사본의 코드 동일성은 미확인이다.",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "claim": "설치는 /plugin 메뉴의 Discover 탭에서 project 범위로 했고 Installed 탭에서 Enabled를 확인했다(시험 후 사용자 진술).",
+      "source_url": "data/research/hookify-sandbox-record-2026-10-05.md",
+      "source_kind": "hands_on",
+      "fetched_at": "2026-10-05"
+    }
+  ],
+  "install_commands": [
+    "/plugin 메뉴에서 hookify를 project 범위로 설치 (시험에서 실제로 쓴 방법)"
+  ],
+  "install_commands_note": "후보 조사의 '/plugin install hookify@claude-plugins-official' 명령은 직접 실행해 확인하지 않았다(미확인). 시험 설치본의 출처 표기는 anthropic-plugin-directory였고, 로컬 claude-plugins-official 사본에도 hookify가 있었으나 두 사본이 같은 코드인지는 미확인이다.",
+  "hands_on_test": {
+    "tested_at": "2026-10-05",
+    "claude_code_version": "2.1.289",
+    "extension_version": "commit d182ca4 (캐시 폴더 d182ca456ca0-da43175c)",
+    "os": "Windows (Git Bash), 한국어 환경(cp949), Claude Pro 로그인",
+    "environment_caveats": [
+      "시험 폴더는 claude_blog와 분리한 별도 샌드박스(hookify_sandbox)였다.",
+      "같은 세션에 superpowers@claude-plugins-official의 SessionStart 훅도 로드돼 있어 환경이 완전히 깨끗하지는 않았다."
+    ],
+    "observations": [
+      "시험 전 확인: 이 PC에서 python, py, python3 모두 Python 3.14.7로 동작했고 훅은 python3로 실행됐다(Python 경로 문제 없음, 이 PC 기준).",
+      "설치된 커밋(d182ca4) 캐시에서도 LICENSE는 Apache 2.0, README 338~340행은 MIT License였다.",
+      "/plugin Marketplaces 화면에서 Anthropic Directory(Built in, 2484 available)와 claude-plugins-official(315 available, 1 installed)은 별개 마켓플레이스였고, 설치된 hookify는 앞쪽(Anthropic Directory) 항목이었다. 두 사본의 코드 동일성은 미확인.",
+      "설치는 /plugin 메뉴의 Discover 탭에서 project 범위로 했고 Installed 탭에서 Enabled를 확인했다(시험 후 사용자 진술).",
+      "/plugin 화면에서 project 범위로 설치했고 Installed 탭에서 Enabled로 확인했다.",
+      "/hookify:help 출력 첫 문단은 작은 마크다운 규칙으로 차단·경고하며 hooks.json을 직접 편집하지 않는다고 설명했다.",
+      "/hookify:help 는 동작했다.",
+      "help 문서는 '/hookify <설명>'을 안내하지만, 이 환경에서는 /hookify 가 'Unknown command'였고 /hookify:hookify <설명> 으로 하면 규칙이 만들어졌다. 원인은 미확인이며 '이 환경에서는'으로 한정한다.",
+      "한국어 설명을 주면 Claude가 .claude/hookify.<이름>.local.md 규칙 파일로 변환했다. front matter는 name/enabled/event/pattern/action이고 본문은 발동 시 메시지였으며, 본문에 이모지와 한글이 들어갔다.",
+      "규칙을 만든 직후 dummy.txt, dummy2.txt 삭제가 경고도 차단도 없이 실행됐다. /exit 후 재시작해도 같았고, /hooks 에서는 hookify의 PreToolUse 등 훅 등록이 확인됐으며 화면에 오류는 표시되지 않았다(조용히 통과).",
+      "훅 스크립트(pretooluse.py)를 CLAUDE_PLUGIN_ROOT를 설정하고 직접 실행하자 cp949 코덱 오류가 나오고 출력은 {} 종료코드 0이었다. PYTHONUTF8=1 을 설정하면 같은 입력에서 permissionDecision 'deny'와 차단 메시지가 나왔다.",
+      "PYTHONUTF8=1 로 claude를 시작한 실제 세션에서는 차단·경고가 작동했다.",
+      "규칙 파일을 못 읽으면 그 규칙은 건너뛰어지고 명령이 통과했다(fail-open).",
+      "이모지·한글 없는 ASCII 규칙은 PYTHONUTF8 없이도 deny였고(훅 직접 실행 기준), 깨진 규칙 파일 2개가 같은 폴더에 있어도 ASCII 규칙은 작동하며 Error 2줄이 출력됐다.",
+      "block 규칙: PreToolUse에서 'Blocked by hook' 오류, 명령 미실행, 파일 유지.",
+      "warn 규칙: PreToolUse에서 경고가 표시되고 명령은 실행됐으며, PostToolUse에서 같은 경고가 한 번 더 표시돼 총 2회였다.",
+      "warn 시험 후 Claude의 답변이 '경고 메시지도 보이지 않았습니다'였던 경우가 1회 관찰됐다. 반복 확인은 못 했으므로 경고가 모델에게 전달되지 않는다고 단정하지 않는다.",
+      "차단된 명령: rm dummy2.txt, rm ./dummy2.txt, rm -f dummy2.txt.",
+      "통과한 명령(실제 세션): mv dummy2.txt gone.txt — 실행되고 gone.txt가 생성됐다.",
+      "통과한 명령(훅 직접 실행, 파일은 건드리지 않음): rm *.txt, python3 -c \"import os; os.remove('dummy2.txt')\". 대조군 rm dummy2.txt 는 deny였다.",
+      "실제 세션에서 rm *.txt 는 hook이 아니라 Claude Code 자동 모드 분류기('Irreversible Local Destruction')가 거부했고, python 삭제는 모델이 앞선 거부를 근거로 실행하지 않았다. 즉 두 경우 모두 hook이 막은 것이 아니다.",
+      "정리: 시험한 규칙은 파일명과 삭제 명령어가 명령 문자열에 함께 나올 때만 작동하는 문자열 매칭이었다. 이름 변경, 와일드카드, 다른 인터프리터 호출은 규칙에 없으면 통과했다."
+    ],
+    "inferred_not_confirmed": [
+      "(추정) 규칙 파일을 인코딩 지정 없이 읽어 Windows 기본 코드페이지(cp949)로 해석하는 것으로 보인다. 소스 코드는 확인하지 않았다. 실패 위치(byte 0xf0, position 172)가 본문 첫머리 이모지 자리와 맞는다는 점이 근거다."
+    ],
+    "unverified": [
+      "다른 OS·로케일에서의 동작",
+      "최신 버전에서도 재현되는지",
+      "/hookify 단축형이 안 되는 원인",
+      "hookify 소스(인코딩 처리) 원문 대조",
+      "anthropic-plugin-directory 설치본과 claude-plugins-official 로컬 사본이 같은 코드인지",
+      "깨진 규칙 파일의 Error 출력이 실제 세션에서 사용자에게 보이는지",
+      "경고가 모델에게 전달되는지 여부(1회 관찰만 있음)"
+    ],
+    "excluded_as_evidence": [
+      "/hookify:list 실행 후 Claude가 '규칙이 있으므로 삭제하지 않겠다'고 한 것은 hook 차단이 아니라 모델의 자발적 거부였다(실행 시도 없음).",
+      "! 접두사로 사용자가 직접 실행하는 셸 명령은 hook을 거치지 않으므로 시험이 되지 않는다."
+    ],
+    "reproduction_scope": "한국어 Windows(cp949) + project 범위 설치 + 한글/이모지 규칙"
+  },
+  "watch_outs": [
+    "한국어/비UTF-8 Windows(cp949)에서 한글·이모지가 든 규칙 파일은 읽기에 실패하고, 그 규칙은 오류 표시 없이 건너뛰어져 명령이 통과한다(fail-open). 우회: PYTHONUTF8=1 로 claude 시작, 또는 ASCII만 쓴 규칙. 재현 범위는 이 시험 환경에 한정.",
+    "hookify가 만든 규칙은 문자열 매칭이라 mv(이름 변경), 와일드카드, 다른 인터프리터 호출은 규칙에 없으면 통과한다. 실수 방지용으로는 쓸 수 있지만 보안 경계로 믿으면 안 된다.",
+    "README는 /hookify <설명>을 안내하지만 시험 환경에서는 /hookify:hookify <설명>으로만 규칙이 만들어졌다(원인 미확인).",
+    "설치 전 작성자가 Anthropic인지 확인한다. 시험 설치본은 anthropic-plugin-directory 표기였고 후보 조사의 claude-plugins-official 표기와 달랐다(두 사본의 동일성 미확인).",
+    "37,000+ 스타는 claude-plugins-official 모노레포 수치이며 hookify 단독 수치가 아니다. hookify 단독 스타·설치 수는 미확인.",
+    "README에 권한·외부 통신·텔레메트리가 기재돼 있지 않다. '없다'가 아니라 '미확인'이다.",
+    "block 규칙이 의도치 않게 정상 작업을 막을 수 있다.",
+    "Python 3.7 이상이 필요하다(README). 이 PC에서는 python/py/python3 모두 3.14.7로 동작해 경로 문제가 없었다(한 대 기준, 다른 환경 미확인).",
+    "라이선스 표기 불일치: README는 MIT, 같은 폴더의 LICENSE 파일은 Apache 2.0 전문이라 어느 쪽이 적용되는지 알 수 없다."
+  ],
+  "writing_notes": [
+    "글 소재: 규칙이 조용히 무시되면 보안 목적의 hook은 무력해진다(fail-open). 이 블로그의 3중 방어(hook은 실수 방지용, 우회 가능)와 연결할 수 있다.",
+    "후보 조사 단계의 WebFetch 요약은 소형 모델이 만든 것이라 README 기반 claims는 fact-check에서 재확인이 필요하다."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "slug": "claude-code-hookify-plugin-review",
+  "checked_at": "2026-10-05",
+  "verdict": "PASS",
+  "claims_checked": 7,
+  "method": "README는 raw.githubusercontent.com에서 curl로 통째로 받아(340줄, HTTP 200) grep으로 글자 그대로 대조했다. LICENSE도 curl로 받았다. marketplace.json·스타 수는 같은 날 앞선 claim-verifier 판정(PASS)을 그대로 유지했다.",
+  "results": [
+    {
+      "claim": "규칙은 .claude/hookify.*.local.md 형태의 YAML front matter 마크다운 파일이고, event는 bash/file/stop/prompt/all, action은 warn 또는 block이다. 규칙은 대화 패턴 분석이나 명시적 지시로 만든다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/hookify/README.md",
+      "verdict": "PASS",
+      "evidence": "README 24행 '.claude/hookify.warn-rm.local.md', 77~83행 '---'로 감싼 front matter(name/enabled/event: bash/pattern/action: block), 104~105행 'event: file / action: warn', 124~128행 event 5종(bash, file, stop, prompt, all), 147~148행 'action: block' / 'action: warn', 3행 'analyzing conversation patterns or from explicit instructions'."
+    },
+    {
+      "claim": "명령은 /hookify, /hookify:list, /hookify:configure, /hookify:help 이고 README는 재시작 없이 즉시 적용된다고 적었다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/hookify/README.md",
+      "verdict": "PASS",
+      "evidence": "39행 '### Main Command: /hookify', 57행 '/hookify:list', 62행 '/hookify:configure', 68행 '/hookify:help'. 28행 'No restart needed! Rules take effect on the very next tool use.', 309행 'Rules should work immediately - no restart needed'."
+    },
+    {
+      "claim": "README상 Python 3.7 이상이 필요하고 의존성은 표준 라이브러리뿐이다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/hookify/README.md",
+      "verdict": "PASS",
+      "evidence": "300행 '- Python 3.7+', 301행 '- No external dependencies (uses stdlib only)'."
+    },
+    {
+      "claim": "README는 라이선스를 MIT로 적었으나 같은 폴더의 LICENSE 파일은 Apache 2.0 전문이라 어느 쪽이 적용되는지 알 수 없다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/hookify/README.md",
+      "verdict": "PASS",
+      "evidence": "README 338~340행 '## License' 아래 'MIT License'. plugins/hookify/LICENSE(HTTP 200, 11358바이트)의 첫 줄은 'Apache License', 둘째 줄 'Version 2.0, January 2004'. 초안은 두 표기를 모두 그대로 적고 어느 쪽이 맞는지 단정하지 않는다.",
+      "note": "이전 실행에서는 초안이 'MIT licensed'로 단정해 WARNING이었다. 사람이 문구를 위와 같이 바꿔 해소했다."
+    },
+    {
+      "claim": "hookify는 Anthropic 공식 마켓플레이스 매니페스트(marketplace.json)에 등재돼 있다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json",
+      "verdict": "PASS",
+      "evidence": "앞선 claim-verifier 판정 유지: 매니페스트(name claude-plugins-official, owner Anthropic)에 name 'hookify' 항목, source ./plugins/hookify, author Anthropic. 2026-10-05 curl로 raw marketplace.json을 직접 받아(HTTP 200, 189,668바이트) grep -n -i hookify로 재확인: 1841행 \"name\": \"hookify\", 1847행 \"source\": \"./plugins/hookify\", 1849행 homepage. author Anthropic, category productivity.",
+      "note": "해당 항목의 homepage 필드는 anthropics/claude-plugins-public 저장소를 가리킨다. 시험 설치본의 출처 표기(anthropic-plugin-directory)와의 관계는 확인하지 않았다."
+    },
+    {
+      "claim": "claude-plugins-official 저장소는 37,000개 이상의 스타(문턱값)를 가지며 모노레포 수치이고, plugins/ 아래에 hookify가 있다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official",
+      "verdict": "PASS",
+      "evidence": "앞선 claim-verifier 판정 유지: GitHub API 실측 37,407스타, plugins/ 아래 hookify 존재."
+    },
+    {
+      "claim": "hookify README에는 권한, 외부 네트워크 통신, 텔레메트리에 대한 기술이 없다.",
+      "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/plugins/hookify/README.md",
+      "verdict": "PASS",
+      "evidence": "README 전문(340줄)에 대해 grep -i -E 'permission|network|telemetry|analytics|privacy|data collection|upload' 결과 0건. 'http://|https://|curl|send'도 0건(종료코드 1).",
+      "note": "README에 한정한 판정이다. 플러그인 코드가 실제로 네트워크를 쓰는지는 확인하지 않았으므로 '통신하지 않는다'는 뜻으로 쓰면 안 된다."
+    }
+  ],
+  "unsourced_statements": [],
+  "resolved_since_previous_run": [
+    "FAIL 허브 복사본 claim: 사실 주장(many copies exist)과 410 URL(sources 항목 포함)을 초안에서 제거하고 'check the author' 조언만 남겼다.",
+    "FAIL 근거 없는 문장 'settings.json': 'hooks.json'으로 바꾸고 /hookify:help 출력(기록 파일 추가 관찰 a)을 근거로 뒀다.",
+    "FAIL 근거 없는 문장 'Python path': 기록 파일 추가 관찰(b)을 근거로 '이 PC 기준'으로 한정해 다시 썼다.",
+    "WARNING 라이선스: 'MIT licensed' 단정을 README/LICENSE 불일치 서술로 교체했다."
+  ],
+  "hands_on_vs_record": {
+    "record": "data/research/hookify-sandbox-record-2026-10-05.md",
+    "result": "초안의 hands-on 서술은 기록과 대조해 맥락이 달라진 곳이 없고, 미확인·추정 표기도 유지됐다. 이번에 추가된 두 문장((a) /hookify:help 출력, (b) python/py/python3 3.14.7)은 기록의 '추가 관찰' 절과 일치한다.",
+    "not_externally_verified": true,
+    "provenance_note": "(a), (b)는 최초 시험 기록에는 없었고, 이전 fact-check 후 사용자가 보충해 넣은 관찰이다. 이 검증은 초안과 기록의 일치만 확인했으며, 해당 관찰이 시험 당시 실제로 이뤄졌는지는 확인할 수 없다."
+  },
+  "notes": [
+    "README 클레임의 source_kind는 github_readme로 표기돼 있다. 이전 실행에서 verifier 두 곳이 official_docs가 맞고 github_readme는 경계 사례라고 지적했다. 판정에는 반영하지 않았고 사람 확인 사항이다.",
+    "초안 front matter의 extension_version(commit d182ca4)과 설치 출처(anthropic-plugin-directory)는 hands_on 기록 기반이라 외부 검증 대상이 아니다.",
+    "초안 본문의 <!-- UNVERIFIED --> 주석(마켓플레이스 등재)은 위 PASS로 해소돼 제거했다.",
+    "초안의 HTML 주석 2개(시험 범위 안내, Pros 보충 예정 메모)는 사람 지시로 제거했다. 시험 범위 한정은 Watch-outs와 FAQ 본문에 남아 있다.",
+    "세 곳 교체 후 재검증에서 Installation의 'Discover tab'이 기록에 없어 전체 verdict가 PASS에서 FAIL로 내려갔고 status를 READY_FOR_REVIEW에서 DRAFT로 되돌렸다.",
+    "두 곳 재대조 결과 모두 PASS로 전체 verdict를 PASS로 올렸고 status를 READY_FOR_REVIEW로 되돌렸다. 이전 세 곳 교체에서 나온 FAIL/WARNING은 이 재검증으로 해소됐다."
+  ],
+  "new_sentences_check": {
+    "checked_at": "2026-10-05",
+    "scope": "HTML 주석 제거와 함께 이번에 새로 쓰거나 바꾼 문장만 대조했다. 기존 7개 claims 판정은 다시 하지 않았다.",
+    "verdict": "PASS",
+    "results": [
+      {
+        "statement": "README는 MIT, 같은 폴더의 LICENSE는 Apache 2.0 텍스트인 불일치를 설치된 복사본(commit d182ca4)에서도 봤다 (Key features, Watch-outs)",
+        "matched": "data/research/hookify-sandbox-record-2026-10-05.md (추가 관찰 c, d) (c)",
+        "verdict": "PASS",
+        "evidence": "기록 (c): 설치 커밋 캐시의 LICENSE는 Apache License Version 2.0, README 338~340행은 MIT License. 공개 저장소 쪽은 앞선 curl/grep(README 340행 MIT, LICENSE 첫 줄 Apache)으로 확인됨."
+      },
+      {
+        "statement": "설치본 출처 anthropic-plugin-directory는 /plugin 화면의 'Anthropic Directory'(built-in, 2,400개 이상)이고 hookify 항목은 'listed as Anthropic Directory', CLI 이름 없음으로 표시됐다",
+        "matched": "data/research/hookify-sandbox-record-2026-10-05.md (추가 관찰 c, d) (d)",
+        "verdict": "PASS",
+        "evidence": "기록 (d): Anthropic Directory(Built in, 2484 available), 항목 표시 '(no CLI name) · listed as Anthropic Directory'. 2,400은 2484에 대한 하한 표기."
+      },
+      {
+        "statement": "claude-plugins-official은 별개 마켓플레이스(anthropics/claude-plugins-official, 300개 이상, 1 installed)",
+        "matched": "data/research/hookify-sandbox-record-2026-10-05.md (추가 관찰 c, d) (d)",
+        "verdict": "PASS",
+        "evidence": "기록 (d): 315 available, 1 installed, 별개 마켓플레이스. 300은 315에 대한 하한 표기."
+      },
+      {
+        "statement": "이전 조사는 hookify를 claude-plugins-official로 적었고, 이 글의 manifest 확인은 그 마켓플레이스만 다룬다. Directory 쪽 manifest는 확인하지 않았다",
+        "matched": "기록 환경 절(후보 조사 표기) + data/factcheck의 marketplace.json 검증 범위",
+        "verdict": "PASS",
+        "evidence": "마켓플레이스 검증은 raw .claude-plugin/marketplace.json(name claude-plugins-official)만 대상이었고 Directory 쪽 manifest는 조회하지 않았다. 문장이 이를 그대로 밝힌다."
+      },
+      {
+        "statement": "두 사본이 같은 코드인지는 미확인",
+        "matched": "data/research/hookify-sandbox-record-2026-10-05.md (추가 관찰 c, d) (d)",
+        "verdict": "PASS",
+        "evidence": "기록 (d)와 환경 절 모두 미확인으로 적힘."
+      }
+    ],
+    "not_externally_verified": "(c), (d)는 사용자가 팩트체크 후 보충한 관찰이다. 초안과 기록의 일치만 확인했고, 시험 당시 관찰이었는지는 확인할 수 없다.",
+    "unsourced_statements": []
+  },
+  "changed_sentences_check": {
+    "checked_at": "2026-10-05",
+    "scope": "직전 FAIL/WARNING이 나왔던 두 곳(Installation 첫 문장, Short version)만 기록 파일과 다시 대조했다.",
+    "verdict": "PASS",
+    "results": [
+      {
+        "statement": "Installation: /plugin 메뉴의 Discover 탭에서 project 범위로 설치, Installed 탭에서 Enabled 확인",
+        "verdict": "PASS",
+        "evidence": "기록 추가 관찰 (e)(Discover 탭에서 직접 설치, 범위 project, Installed 탭 Enabled)와 시간순 1번(project 범위 설치, Installed 탭 Enabled)에 일치.",
+        "provenance_note": "(e)는 시험 후 사용자 진술로 기록에 추가된 항목이다. 초안과 기록의 일치만 확인했고 시험 당시 기록이 아니다."
+      },
+      {
+        "statement": "Short version: 한글·이모지 규칙이 조용히 건너뛰어져 명령이 통과 / PYTHONUTF8=1로 시작하면 해결, ASCII 규칙은 훅 직접 실행에서도 작동 / block은 이름 지정 삭제 명령 차단, warn은 메시지만 표시 / mv는 통과 / 속도 방지턱이지 안전 경계가 아님",
+        "verdict": "PASS",
+        "evidence": "시간순 4~6(조용한 통과, PYTHONUTF8=1 실제 세션에서 차단·경고 작동, ASCII 규칙은 훅 직접 실행 기준 deny), block/warn 절, 우회 절(mv 실제 세션 통과)과 일치. 이전 WARNING 사유였던 ASCII 규칙의 'direct hook run' 한정이 문장에 반영됐다. 마지막 문장은 기록 결론(문자열 매칭, 우회 가능)에 근거한 의견성 문장이다."
+      }
+    ],
+    "unsourced_statements": []
+  }
+}
