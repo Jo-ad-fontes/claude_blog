@@ -1,0 +1,250 @@
+{
+  "purpose": "세 번째 글(connectors 카테고리) 후보 선정",
+  "created_at": "2026-10-07",
+  "method_notes": [
+    "후보는 설치·실행하지 않았다. 각 저장소의 README와 LICENSE를 curl로 raw 원문으로 받아 grep으로 확인했다(설치 명령, Windows 안내, 보안 경고, 텔레메트리 언급 여부, 라이선스).",
+    "스타·포크·라이선스 분류·push 날짜는 GitHub API(api.github.com/repos/<owner>/<repo>) 응답이다. 변동 수치라 글에서는 하한으로 쓴다.",
+    "modelcontextprotocol/servers 저장소의 활성 서버 목록과 '교육용 예시' 문구는 WebFetch 요약 기반이다. 원문 대조 전이다.",
+    "'텔레메트리·analytics 언급 없음'은 후보 README를 grep한 결과(0건)일 뿐 코드가 수집하지 않는다는 뜻이 아니다. 권한·네트워크 동작은 코드를 읽지 않아 모두 미확인이다.",
+    "Claude Code 공식 MCP 문서(code.claude.com/docs/en/mcp)는 검색 결과에서 존재만 확인했고 본문은 읽지 않았다. 설치 범위(user/project/local) 같은 Claude Code 쪽 동작은 이 파일의 클레임에 넣지 않았다.",
+    "claude.ai 커넥터 디렉터리(원격·OAuth 방식)는 이번에 조사하지 않았다. 후보는 모두 로컬에서 시험 가능한 MCP 서버 위주다. 원격 커넥터가 필요하면 별도 조사가 필요하다.",
+    "이 PC에 uvx(~/.local/bin), npx(Node v24.21.0), Python 3.14.7이 있음을 확인했다. 실제 서버 실행·Windows 동작은 확인하지 않았다."
+  ],
+  "excluded_by_overlap": [],
+  "candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "modelcontextprotocol-servers-memory",
+      "name": "MCP Memory server (@modelcontextprotocol/server-memory)",
+      "type": "connector",
+      "category": "connectors",
+      "rank_reason": "비밀값·계정 없이 로컬에서 시험할 수 있고, Claude Code 자체의 메모리(CLAUDE.md)와 역할이 겹쳐 '직접 써봐야 아는 차이'를 쓰기 좋다.",
+      "listed_in": {
+        "marketplace": "modelcontextprotocol/servers 참조 구현 모음(마켓플레이스 아님)",
+        "repository": "modelcontextprotocol/servers",
+        "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+        "source_kind": "github_readme",
+        "fetched_at": "2026-10-07"
+      },
+      "claims": [
+        {
+          "claim": "모노레포 modelcontextprotocol/servers는 91,000+ 스타, 11,000+ 포크이며 아카이브되지 않았다(수치는 모노레포 전체, memory 서버 단독 수치가 아니다).",
+          "source_url": "https://api.github.com/repos/modelcontextprotocol/servers",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "memory 서버는 지식 그래프(엔티티, 관계, 관찰) 기반의 영속 메모리를 제공하며 저장 파일은 JSONL이고 MEMORY_FILE_PATH 환경변수로 경로를 바꿀 수 있다. 기본값은 서버 디렉터리의 memory.jsonl이다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README에 Windows에서는 npx를 'cmd /c'로 실행하라는 별도 설정 예시가 있다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "저장소 README는 참조 서버를 개발자용 교육 예시로 규정하고 프로덕션용이 아니라고 밝힌다.",
+          "source_url": "https://github.com/modelcontextprotocol/servers",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07",
+          "note": "WebFetch 요약 기반, 원문 대조 전"
+        }
+      ],
+      "criteria": {
+        "verifiability": { "rating": "높음", "evidence": "서버별 README에 도구 목록, 환경변수, 설치 방법이 상세히 있어 공식 주장을 직접 시험으로 대조하기 쉽다.", "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md" },
+        "tryability": { "rating": "높음", "evidence": "npx(Node 있음) 또는 Docker로 실행하며 README에 API 키·계정 요구가 없다(api key/token 언급 0건). Windows용 cmd /c 설정이 따로 있어 환경 의존 가능성이 있다.", "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md" },
+        "demand": { "rating": "중간", "evidence": "상위 모노레포가 91,000+ 스타다. memory 서버 단독 수요 수치는 미확인이다.", "source_url": "https://api.github.com/repos/modelcontextprotocol/servers" },
+        "differentiation": { "rating": "높음", "evidence": "추정: Claude Code에 이미 CLAUDE.md와 자체 메모리가 있어 '이게 정말 필요한가'를 실제로 써보며 비교할 수 있다. 기존 리뷰 존재 여부는 이번에 검색하지 않아 미확인이다." },
+        "risks": { "rating": "중간", "evidence": "메모리 파일에 대화 내용이 평문으로 쌓일 수 있다(저장 형식이 JSONL인 것은 README 근거, 민감정보가 실제로 쌓이는지는 미확인). 라이선스는 README(신규 Apache 2.0, 기존 MIT)와 GitHub API 분류(NOASSERTION)가 달라 단정할 수 없다. 기본 저장 경로가 서버 디렉터리라 npx 실행 시 위치가 불명확할 수 있다(미확인)." }
+      },
+      "install_command_unverified": "README의 설정 예시는 command=npx, args=[-y, @modelcontextprotocol/server-memory] 형태(Windows는 cmd /c). 'claude mcp add' 형태의 명령은 이 README에 없다. 미검증."
+    },
+    {
+      "rank": 2,
+      "candidate_id": "modelcontextprotocol-servers-fetch",
+      "name": "MCP Fetch server (mcp-server-fetch)",
+      "type": "connector",
+      "category": "connectors",
+      "rank_reason": "README 자체가 로컬·내부 IP 접근 위험과 Windows 인코딩 문제를 경고하고 있어 '함정 정리'로 독자 가치가 크고, 비밀값 없이 시험할 수 있다.",
+      "listed_in": {
+        "marketplace": "modelcontextprotocol/servers 참조 구현 모음(마켓플레이스 아님)",
+        "repository": "modelcontextprotocol/servers",
+        "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+        "source_kind": "github_readme",
+        "fetched_at": "2026-10-07"
+      },
+      "claims": [
+        {
+          "claim": "README는 이 서버가 로컬·내부 IP 주소에 접근할 수 있어 보안 위험이 될 수 있다고 경고한다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "기본값은 모델이 도구로 요청할 때 robots.txt를 따르고, 사용자 시작(프롬프트) 요청에서는 따르지 않는다. --ignore-robots-txt 인자로 끌 수 있다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "Windows에서 타임아웃이 나면 PYTHONIOENCODING=utf-8 환경변수를 설정하라는 안내가 README에 있다(uvx용, pip용 예시 각각).",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README는 MCP Python SDK 1.x(mcp>=1.29.0,<2)가 필요하고 SDK 2.0 대응은 진행 중이라고 밝힌다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        }
+      ],
+      "criteria": {
+        "verifiability": { "rating": "높음", "evidence": "동작 옵션(robots.txt, 프록시 등)이 README에 명시돼 시험으로 대조할 수 있다.", "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md" },
+        "tryability": { "rating": "높음", "evidence": "uvx와 uv가 이 PC에 있음을 확인했다. README에 API 키 요구는 없다. Windows 인코딩 설정이 필요할 수 있다.", "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/fetch/README.md" },
+        "demand": { "rating": "미확인", "evidence": "fetch 서버 단독 수요 수치는 확인하지 못했다. 상위 모노레포는 91,000+ 스타이나 이 서버의 수치가 아니다.", "source_url": null },
+        "differentiation": { "rating": "중간", "evidence": "추정: Claude Code에 WebFetch 내장 도구가 있어 겹치지만, 변환 결과 비교·robots.txt 동작 같은 직접 시험 항목은 더할 수 있다. 기존 리뷰 존재 여부는 미확인이다." },
+        "risks": { "rating": "중간", "evidence": "내부 네트워크 접근 경고가 README에 있다. 시험은 공개 URL로만 해야 한다. 외부 페이지 내용이 모델 컨텍스트로 들어오므로 프롬프트 인젝션 시험 대상이 될 수 있어 격리된 환경에서 해야 한다. 라이선스 표기는 memory 서버와 같은 모노레포 이슈(README와 API 분류 불일치)가 있다." }
+      },
+      "install_command_unverified": "README의 설정 예시는 command=uvx, args=[mcp-server-fetch] 또는 pip install mcp-server-fetch 후 python -m mcp_server_fetch. 미검증."
+    },
+    {
+      "rank": 3,
+      "candidate_id": "microsoft-playwright-mcp",
+      "name": "Playwright MCP (@playwright/mcp)",
+      "type": "connector",
+      "category": "connectors",
+      "rank_reason": "수요는 가장 확인되지만, README가 코딩 에이전트에는 MCP보다 CLI+SKILL을 권한다고 스스로 밝혀 '정말 MCP가 맞는가'라는 흥미로운 글감이 된다. 다만 브라우저 의존으로 시험 부담이 크다.",
+      "listed_in": {
+        "marketplace": "독립 저장소(마켓플레이스 등재 여부는 미확인)",
+        "repository": "microsoft/playwright-mcp",
+        "source_url": "https://github.com/microsoft/playwright-mcp",
+        "source_kind": "github_readme",
+        "fetched_at": "2026-10-07"
+      },
+      "claims": [
+        {
+          "claim": "microsoft/playwright-mcp 저장소는 37,000+ 스타, 3,000+ 포크이며 라이선스는 Apache-2.0이다(LICENSE 원문이 Apache License 2.0이고 GitHub API 분류와 일치).",
+          "source_url": "https://api.github.com/repos/microsoft/playwright-mcp",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "스크린샷 대신 접근성 스냅샷을 구조화된 데이터로 사용해 웹 페이지를 조작하는 브라우저 자동화 MCP 서버다.",
+          "source_url": "https://raw.githubusercontent.com/microsoft/playwright-mcp/main/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README는 코딩 에이전트에는 토큰 효율 면에서 CLI+SKILL 방식이 더 낫고, MCP는 지속 상태와 풍부한 점검이 필요한 탐색적 자동화·장기 실행에 적합하다고 설명한다.",
+          "source_url": "https://raw.githubusercontent.com/microsoft/playwright-mcp/main/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README의 Claude Code용 명령은 'claude mcp add playwright npx @playwright/mcp@latest'다.",
+          "source_url": "https://raw.githubusercontent.com/microsoft/playwright-mcp/main/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        }
+      ],
+      "criteria": {
+        "verifiability": { "rating": "높음", "evidence": "README가 길고(약 67KB) 옵션과 설치 방법이 상세하다. 벤더(Microsoft) 저장소이고 LICENSE 원문을 확인했다.", "source_url": "https://raw.githubusercontent.com/microsoft/playwright-mcp/main/README.md" },
+        "tryability": { "rating": "중간", "evidence": "npx와 Node가 있다. 계정·API 키는 README상 불필요해 보이나 브라우저 바이너리 설치·실제 브라우저 창 실행 여부와 크기는 확인하지 못했다.", "source_url": "https://raw.githubusercontent.com/microsoft/playwright-mcp/main/README.md" },
+        "demand": { "rating": "높음", "evidence": "이 저장소 단독으로 37,000+ 스타다.", "source_url": "https://api.github.com/repos/microsoft/playwright-mcp" },
+        "differentiation": { "rating": "중간", "evidence": "이 PC에는 이미 Claude in Chrome 브라우저 자동화 도구가 있어 비교 글감은 되지만, 기존 리뷰가 많을 것으로 추정된다(검색해 확인하지 않아 미확인)." },
+        "risks": { "rating": "높음", "evidence": "임의 웹 페이지를 열고 조작하는 도구라 프롬프트 인젝션과 로그인 세션 노출 위험이 크다(추정). 시험은 로그인 없는 격리 환경에서 해야 한다. 브라우저 다운로드 크기·위치는 미확인이다." }
+      },
+      "install_command_unverified": "claude mcp add playwright npx @playwright/mcp@latest (README 기재, 미검증)"
+    },
+    {
+      "rank": 4,
+      "candidate_id": "upstash-context7",
+      "name": "Context7 MCP (@upstash/context7-mcp)",
+      "type": "connector",
+      "category": "connectors",
+      "rank_reason": "수요는 크고 문서 최신화라는 실제 문제를 풀지만, 계정과 API 키 발급 흐름이 시험 조건(비밀값 없이)과 충돌한다.",
+      "listed_in": {
+        "marketplace": "독립 저장소(마켓플레이스 등재 여부는 미확인)",
+        "repository": "upstash/context7",
+        "source_url": "https://github.com/upstash/context7",
+        "source_kind": "github_readme",
+        "fetched_at": "2026-10-07"
+      },
+      "claims": [
+        {
+          "claim": "upstash/context7 저장소는 62,000+ 스타, 3,000+ 포크이며 LICENSE 원문은 MIT다(GitHub API 분류도 MIT).",
+          "source_url": "https://api.github.com/repos/upstash/context7",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README는 더 높은 요청 한도를 위해 context7.com/dashboard에서 무료 API 키를 받기를 권장한다.",
+          "source_url": "https://raw.githubusercontent.com/upstash/context7/master/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "권장 설정 명령 'npx ctx7 setup'은 OAuth로 인증하고 API 키를 생성하며 스킬을 설치한다. CLI+Skills와 MCP 모드 중 선택한다.",
+          "source_url": "https://raw.githubusercontent.com/upstash/context7/master/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "수동 설정은 원격 서버 URL https://mcp.context7.com/mcp 에 Authorization: Bearer 헤더로 API 키를 전달하는 방식이다.",
+          "source_url": "https://raw.githubusercontent.com/upstash/context7/master/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        }
+      ],
+      "criteria": {
+        "verifiability": { "rating": "중간", "evidence": "README 설명은 명확하나 서버 본체가 원격(mcp.context7.com)이라 코드로 동작을 검증할 수 없을 가능성이 있다(저장소에 서버 코드가 어디까지 있는지 미확인).", "source_url": "https://raw.githubusercontent.com/upstash/context7/master/README.md" },
+        "tryability": { "rating": "낮음", "evidence": "setup 흐름이 OAuth 로그인과 API 키 생성을 포함한다. 무료 키 없이 쓸 수 있는 범위는 README만으로 확인하지 못했다. 시험 조건인 '비밀값 없음'과 충돌할 수 있다.", "source_url": "https://raw.githubusercontent.com/upstash/context7/master/README.md" },
+        "demand": { "rating": "높음", "evidence": "이 저장소 단독으로 62,000+ 스타다.", "source_url": "https://api.github.com/repos/upstash/context7" },
+        "differentiation": { "rating": "중간", "evidence": "추정: 인기가 높아 기존 리뷰가 많을 가능성이 크다(검색해 확인하지 않음). 무료 한도·실제 정확도 같은 직접 시험 항목은 더할 수 있다." },
+        "risks": { "rating": "높음", "evidence": "외부 서비스로 질의가 전송된다(원격 URL 사용은 README 근거, 전송 데이터 범위는 미확인). 계정·API 키 필요, 유료 전환 여부는 미확인. 텔레메트리는 README에 언급 없음(코드 확인 아님)." }
+      },
+      "install_command_unverified": "npx ctx7 setup (README 기재, 미검증)"
+    },
+    {
+      "rank": 5,
+      "candidate_id": "modelcontextprotocol-servers-git",
+      "name": "MCP Git server (mcp-server-git)",
+      "type": "connector",
+      "category": "connectors",
+      "rank_reason": "시험은 쉽지만 Claude Code가 Bash로 git을 이미 쓰고 이 저장소는 git 쓰기를 hook으로 막고 있어 차별점과 시험 안전성이 모두 약하다.",
+      "listed_in": {
+        "marketplace": "modelcontextprotocol/servers 참조 구현 모음(마켓플레이스 아님)",
+        "repository": "modelcontextprotocol/servers",
+        "source_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+        "source_kind": "github_readme",
+        "fetched_at": "2026-10-07"
+      },
+      "claims": [
+        {
+          "claim": "git 서버는 저장소 읽기·검색·조작 도구를 제공하며 --repository 인자로 대상 저장소 경로를 받는다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        },
+        {
+          "claim": "README는 MCP Python SDK 1.x(mcp>=1.29.0,<2)가 필요하다고 밝힌다.",
+          "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/README.md",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-07"
+        }
+      ],
+      "criteria": {
+        "verifiability": { "rating": "높음", "evidence": "도구 목록이 README에 있다.", "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/git/README.md" },
+        "tryability": { "rating": "중간", "evidence": "uvx가 있고 키 요구가 없다. 단 이 저장소에서는 CLAUDE.md의 hook이 git 쓰기 명령을 막는다. MCP 도구 경로로 쓰면 hook의 설계 의도를 우회하는 셈이 되므로 이 저장소에서 시험하면 안 된다. 별도 연습용 저장소가 필요하다." },
+        "demand": { "rating": "미확인", "evidence": "git 서버 단독 수치는 확인하지 못했다.", "source_url": null },
+        "differentiation": { "rating": "낮음", "evidence": "추정: Bash로 git을 직접 쓰는 Claude Code와 기능이 겹친다." },
+        "risks": { "rating": "높음", "evidence": "쓰기 성격의 git 작업(커밋 등)을 도구로 노출하는지 도구 목록 전체는 확인하지 않았다. 잘못된 저장소 경로로 시험하면 실제 저장소가 변경될 수 있다." }
+      },
+      "install_command_unverified": "README의 설정 예시는 command=uvx, args=[mcp-server-git, --repository, path/to/git/repo]. 미검증."
+    }
+  ]
+}

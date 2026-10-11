@@ -1,0 +1,239 @@
+{
+  "purpose": "두 번째 글(플러그인 hands-on 리뷰) 후보 선정",
+  "created_at": "2026-10-05",
+  "method_notes": [
+    "플러그인은 설치·실행하지 않았다. README, 마켓플레이스 매니페스트, 공식 설명 페이지 읽기까지만 했다.",
+    "페이지는 WebFetch로 열었고, 본문 요약은 WebFetch의 소형 모델이 만든 것이다. 원문 직접 대조는 하지 않았다. fact-check 단계에서 재확인이 필요하다.",
+    "저장소에 extension-research 스킬 파일이 없어(.claude/skills/ 에는 write-review, fact-check만 존재) 사용자가 준 선정 기준 5개를 직접 적용했다.",
+    "claude.com/plugins 페이지에는 설치 수가 표시되지 않았다. 플러그인별 설치 수는 확인하지 못했다.",
+    "플러그인별 README에 '미기재(not stated)'로 나온 항목(권한, 네트워크, 텔레메트리)은 '없다'가 아니라 '미확인'이다."
+  ],
+  "excluded_by_overlap": [
+    {
+      "name": "superpowers",
+      "reason": "이미 쓴 글(articles/published/claude-code-superpowers-skill-review.md)"
+    },
+    {
+      "name": "feature-dev",
+      "reason": "7단계 기능 개발 워크플로(탐색-질문-설계-구현-리뷰)가 Superpowers의 brainstorming 중심 흐름과 역할이 겹친다. 차별성이 약해 5위 안에 넣지 않았다.",
+      "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    },
+    {
+      "name": "mattpocock-skills",
+      "reason": "tdd, code-review 등을 포함한 Skill 모음이라 Superpowers와 범주가 겹치고, 플러그인이라기보다 Skills 슬롯 후보다. 이슈 트래커(GitHub/Linear/로컬) 설정이 필요하다.",
+      "stars_lower_bound": "276,000+",
+      "source_url": "https://github.com/mattpocock/skills",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-05"
+    }
+  ],
+  "marketplace_evidence": {
+    "claim": "claude-plugins-official 저장소는 37,000+ 스타, 4,000+ 포크이며 plugins/(Anthropic 제작)와 external_plugins/(파트너·커뮤니티)로 나뉜다. 제3자 플러그인은 품질·보안 승인 기준을 거친다고 README에 적혀 있다.",
+    "source_url": "https://github.com/anthropics/claude-plugins-official",
+    "source_kind": "github_readme",
+    "fetched_at": "2026-10-05"
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "anthropics-hookify",
+      "name": "hookify",
+      "type": "plugin",
+      "category": "plugins",
+      "listed_in_official_marketplace": true,
+      "listing_source": {
+        "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json",
+        "source_kind": "official_docs",
+        "fetched_at": "2026-10-05"
+      },
+      "claims": [
+        {
+          "claim": "hookify는 대화 패턴 분석이나 명시적 지시로 '원치 않는 동작을 막는 규칙(훅)'을 만들어 주는 플러그인이다. 규칙은 .claude/hookify.*.local.md 형태의 YAML front matter 마크다운 파일이고, event는 bash/file/stop/prompt/all, action은 warn 또는 block이다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "명령은 /hookify, /hookify:list, /hookify:configure, /hookify:help 이고, 규칙은 재시작 없이 즉시 적용된다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "Python 3.7 이상이 필요하고 의존성은 표준 라이브러리뿐이며, 라이선스는 MIT다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/hookify",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "hookify라는 이름의 복사본·포크가 여러 사용자 계정으로 플러그인 허브 사이트에 다수 노출된다(검색 결과 기준, 개별 페이지는 열지 않음).",
+          "source_url": "https://www.claudepluginhub.com/plugins/jolks-hookify-plugins-hookify",
+          "source_kind": "community",
+          "fetched_at": "2026-10-05"
+        }
+      ],
+      "criteria": {
+        "verifiability": "높음: 마켓플레이스 매니페스트에 등재, README 확인.",
+        "tryability": "Pro 구독만으로 가능해 보임. API 키·유료 계정·비밀값 불필요(README에 요구 없음). 단 Windows(Git Bash)에서 python 실행 경로(python vs python3)가 동작하는지는 미확인. 감점 요인 아님, 테스트 리스크.",
+        "demand": "플러그인 단독 스타·설치 수는 확인하지 못했다(모노레포 37,000+ 스타만 확인). '미확인'. 주제(Claude Code hooks)는 영어 검색 수요가 있을 가능성이 높으나 이는 추정이다.",
+        "differentiation": "Anthropic 제작 플러그인으로 settings.json 훅을 직접 짜지 않고 마크다운 규칙으로 만든다는 점이 차별점. 이름이 겹치는 복사본이 다수 있어 설치 시 anthropics 공식본(hookify@claude-plugins-official)인지 확인이 필요하다.",
+        "risks": "README상 권한·외부 통신·텔레메트리 모두 미기재(미확인). 훅을 만드는 플러그인이라 block 규칙이 의도치 않게 작업을 막을 수 있다. 이 저장소의 보안 hook과의 상호작용은 별도 샌드박스 저장소에서만 테스트해야 한다."
+      },
+      "install_command_unverified": "/plugin install hookify@claude-plugins-official"
+    },
+    {
+      "rank": 2,
+      "candidate_id": "anthropics-frontend-design",
+      "name": "frontend-design",
+      "type": "plugin",
+      "category": "plugins",
+      "listed_in_official_marketplace": true,
+      "listing_source": {
+        "source_url": "https://claude.com/plugins",
+        "source_kind": "official_docs",
+        "fetched_at": "2026-10-05"
+      },
+      "claims": [
+        {
+          "claim": "claude.com/plugins의 인기 플러그인 목록 맨 앞에 'Frontend Design (Anthropic verified)'이 표시된다. 설치 수는 페이지에 없다.",
+          "source_url": "https://claude.com/plugins",
+          "source_kind": "official_docs",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "스킬 기반으로 프런트엔드 작업 시 자동 발동하며 별도 명령이 없다. 파일 구성은 .claude-plugin, skills/frontend-design/, LICENSE, README.md 이다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/frontend-design",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "같은 이름의 frontend-design 스킬이 anthropics/skills 저장소에도 있으며, 플러그인은 설치가 더 쉬운 형태라고 서드파티 글이 설명한다(두 저장소를 직접 대조하지는 않음).",
+          "source_url": "https://designrevision.com/blog/claude-code-frontend-design-plugin",
+          "source_kind": "community",
+          "fetched_at": "2026-10-05"
+        }
+      ],
+      "criteria": {
+        "verifiability": "높음: 공식 마켓플레이스·공식 설명 페이지.",
+        "tryability": "가장 쉬움. 요구사항 README에 없음. 비밀값 불필요.",
+        "demand": "인기 목록 1위 표시는 확인. 설치 수·스타는 미확인.",
+        "differentiation": "시각적 결과물이 나오는 글이라 독자 반응에 유리하나, 같은 이름의 스킬(anthropics/skills)과 서드파티 디자인 스킬이 많다. 'README엔 요구사항이 없다'로 끝나는 설치 요약에 그칠 위험이 있어 before/after 비교 실험이 필요하다.",
+        "risks": "권한·훅·네트워크·텔레메트리 모두 README에 미기재(미확인)."
+      },
+      "install_command_unverified": "/plugin install frontend-design@claude-plugins-official"
+    },
+    {
+      "rank": 3,
+      "candidate_id": "anthropics-claude-md-management",
+      "name": "claude-md-management",
+      "type": "plugin",
+      "category": "plugins",
+      "listed_in_official_marketplace": true,
+      "listing_source": {
+        "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json",
+        "source_kind": "official_docs",
+        "fetched_at": "2026-10-05"
+      },
+      "claims": [
+        {
+          "claim": "claude-md-improver 스킬('audit my CLAUDE.md files' 같은 요청에 발동)과 /revise-claude-md 명령(세션 말미에 배운 내용을 CLAUDE.md에 반영)을 제공한다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "claude.com/plugins 인기 목록에 'CLAUDE.md Management (Anthropic verified)'이 포함돼 있다.",
+          "source_url": "https://claude.com/plugins",
+          "source_kind": "official_docs",
+          "fetched_at": "2026-10-05"
+        }
+      ],
+      "criteria": {
+        "verifiability": "높음.",
+        "tryability": "쉬움: 요구사항 미기재, 외부 계정 불필요.",
+        "demand": "설치 수·스타 미확인. CLAUDE.md는 Claude Code 사용자의 공통 관심사라는 점은 추정.",
+        "differentiation": "이 블로그 프로젝트 자체가 CLAUDE.md 중심으로 운영되므로 실사용 근거가 강하다. 다만 /revise-claude-md는 CLAUDE.md를 직접 수정하므로 실제 프로젝트가 아니라 복사본 저장소에서 테스트해야 한다.",
+        "risks": "권한·훅·네트워크 미기재(미확인). 파일 수정 도구라는 점이 위험 요소."
+      },
+      "install_command_unverified": "/plugin install claude-md-management@claude-plugins-official"
+    },
+    {
+      "rank": 4,
+      "candidate_id": "upstash-context7",
+      "name": "context7",
+      "type": "plugin",
+      "category": "plugins",
+      "listed_in_official_marketplace": true,
+      "listing_source": {
+        "source_url": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json",
+        "source_kind": "official_docs",
+        "fetched_at": "2026-10-05"
+      },
+      "claims": [
+        {
+          "claim": "context7 플러그인은 원격 MCP 서버(https://mcp.context7.com/mcp)에 연결하며 로컬 Node.js/npx가 필요 없다. API 키는 선택이고, 없으면 공유 익명 한도로 연결된다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/context7",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "upstash/context7 저장소는 62,000+ 스타, 3,000+ 포크이며 MIT 라이선스다. README는 커뮤니티가 기여한 문서의 정확성을 보장할 수 없다고 밝힌다. README에는 텔레메트리·개인정보 관련 언급이 없다.",
+          "source_url": "https://github.com/upstash/context7",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        }
+      ],
+      "criteria": {
+        "verifiability": "높음.",
+        "tryability": "익명으로 가능. API 키 없이 체험 가능하지만 한도에 걸릴 수 있다. 키를 쓰면 비밀값이 생기므로 쓰지 않는 쪽으로 제한.",
+        "demand": "저장소 62,000+ 스타(2026-10-05 확인). 인기 목록에도 포함. 이 중 가장 수요 근거가 강하다.",
+        "differentiation": "'최신 문서 조회' MCP라는 뚜렷한 용도. 다만 실체가 MCP 서버라 Connectors 주간 슬롯과 범주가 겹친다. 플러그인 글로 쓸지 커넥터 글로 쓸지 사람이 정해야 한다.",
+        "risks": "프롬프트에서 뽑은 라이브러리 쿼리가 외부 서비스(mcp.context7.com)로 전송된다. 텔레메트리 미확인. 문서 정확성 보장 없음."
+      },
+      "install_command_unverified": "/plugin install context7@claude-plugins-official"
+    },
+    {
+      "rank": 5,
+      "candidate_id": "anthropics-code-review",
+      "name": "code-review",
+      "type": "plugin",
+      "category": "plugins",
+      "listed_in_official_marketplace": true,
+      "listing_source": {
+        "source_url": "https://claude.com/plugins",
+        "source_kind": "official_docs",
+        "fetched_at": "2026-10-05"
+      },
+      "claims": [
+        {
+          "claim": "/code-review는 PR을 대상으로 CLAUDE.md 준수 에이전트 2개, 버그 탐지 1개, 이력 분석 1개를 병렬 실행하고 확신도 80 이상인 이슈만 리뷰 코멘트로 게시한다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-review",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "GitHub CLI(gh) 설치와 인증, 그리고 리뷰 대상 PR이 필요하다. gh로 PR·diff·blame 조회와 코멘트 게시를 한다.",
+          "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-review",
+          "source_kind": "github_readme",
+          "fetched_at": "2026-10-05"
+        },
+        {
+          "claim": "claude.com/plugins 인기 목록에 포함돼 있다.",
+          "source_url": "https://claude.com/plugins",
+          "source_kind": "official_docs",
+          "fetched_at": "2026-10-05"
+        }
+      ],
+      "criteria": {
+        "verifiability": "높음.",
+        "tryability": "감점: gh 인증(GitHub 계정)과 테스트용 PR이 필요하다. 이 프로젝트는 Claude가 push·PR 작업을 하지 않는 규칙이라 사람이 테스트 PR을 열어야 한다. 코멘트가 실제 PR에 게시될 수 있어 연습용 저장소가 필요하다.",
+        "demand": "설치 수·스타 미확인. 코드 리뷰는 수요가 큰 주제로 추정.",
+        "differentiation": "Claude Code 내장 /code-review 스킬(이 세션에서도 사용 가능)과 이름이 같아 혼동 위험이 크다. 둘의 차이를 직접 확인하지 못했다(미확인). 이 점이 오히려 글감이 될 수 있다.",
+        "risks": "gh를 통한 외부 게시 권한이 필요하다(코멘트 게시). 텔레메트리 미확인."
+      },
+      "install_command_unverified": "/plugin install code-review@claude-plugins-official"
+    }
+  ]
+}
