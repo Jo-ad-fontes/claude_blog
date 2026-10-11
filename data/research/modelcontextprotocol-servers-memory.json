@@ -1,0 +1,251 @@
+{
+  "candidate_id": "modelcontextprotocol-servers-memory",
+  "name": "MCP Memory server (@modelcontextprotocol/server-memory)",
+  "type": "connector",
+  "category": "connectors",
+  "urls": {
+    "official": "https://www.npmjs.com/package/@modelcontextprotocol/server-memory",
+    "github": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory"
+  },
+  "research_notes": [
+    "조사일 2026-10-07. 설치·실행하지 않았다. README(루트, memory), LICENSE(루트), package.json, src/memory/index.ts는 raw.githubusercontent.com에서 curl로 받아 grep과 sed로 읽었다.",
+    "GitHub API(저장소·커밋)와 npm 레지스트리(registry.npmjs.org) 응답은 curl 원문이다.",
+    "hands_on_test는 만들지 않았다."
+  ],
+  "claims": [
+    {
+      "claim": "저장소 modelcontextprotocol/servers의 루트 README는 이 저장소의 서버들을 MCP 기능과 SDK 사용법을 보여주는 참조 구현이자 개발자용 교육 예시라고 규정하고, 프로덕션용 솔루션이 아니라고 밝힌다. 개발자가 자기 위협 모델에 맞는 보안 요건을 직접 평가하고 안전장치를 구현하라고 안내한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "루트 README는 이 저장소가 MCP 운영위원회(steering group)가 유지하는 소수의 참조 서버만 담는다고 설명하고, 서버 목록은 MCP Registry에서 찾으라고 안내한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "Memory 서버는 루트 README의 'Reference Servers' 목록에 지식 그래프 기반 영속 메모리 시스템으로 올라 있고, 아카이브 목록(servers-archived)에는 없다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "유지 상태(2026-10-07 시점): modelcontextprotocol/servers는 아카이브되지 않았고 마지막 push가 2026-10-05이다. src/memory 경로의 최근 커밋은 2026-09-03에 있으며 동시 쓰기 경쟁 수정, 배치 내 중복 제거, search_nodes 질의 길이 제한, 디스크에서 불러올 때의 항목 검증 등이다. npm 최신 버전은 2026.8.31(2026-08-31 게시)이고 deprecated 표시는 없었다.",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers/commits?path=src/memory&per_page=5",
+      "source_kind": "release_notes",
+      "fetched_at": "2026-10-07",
+      "note": "유지 상태는 위 시점의 커밋·게시 날짜로 본 것이다. 앞으로 계속 유지된다는 뜻이 아니다. 커밋 목록은 최근 5건만 확인했다."
+    },
+    {
+      "claim": "모노레포 modelcontextprotocol/servers는 91,000+ 스타, 11,000+ 포크다. 이 수치는 모노레포 전체이며 memory 서버 단독 수치가 아니다.",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "루트 README의 라이선스 절은 신규 기여에는 Apache License 2.0을, 기존 코드에는 MIT를 적용한다고 쓰고 LICENSE 파일을 참조하라고 한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "루트 LICENSE 파일은 MIT에서 Apache-2.0으로 이전하는 중이라고 설명한다. 신규 코드와 명세 기여는 Apache-2.0이고, 재라이선스 동의를 받은 기여도 Apache-2.0이며, 동의하지 않은 MIT 기여자의 기여는 계속 MIT다. 파일에는 Apache 2.0 전문과 MIT License 본문(Copyright 2024-2025 Model Context Protocol a Series of LF Projects, LLC.)이 함께 들어 있다. 문서 기여(명세 제외)는 CC-BY-4.0이라고 쓰여 있다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/LICENSE",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "memory 서버 디렉터리에는 별도 LICENSE 파일이 없다(src/memory/LICENSE는 404). 패키지 package.json의 license 필드는 'SEE LICENSE IN LICENSE'이고 npm 레지스트리도 같은 값이다. GitHub API의 저장소 라이선스 분류는 NOASSERTION이다. 따라서 memory 서버 코드 한 줄 한 줄이 Apache-2.0인지 MIT인지는 원문만으로 확정하지 못했다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/package.json",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "memory README는 이 서버를 로컬 지식 그래프로 구현한 기본적인 영속 메모리라고 소개하고, 개체(entities), 관계(relations), 관찰(observations)로 구성된다고 설명한다. 도구는 create_entities, create_relations, add_observations, delete_entities, delete_observations, delete_relations, read_graph, search_nodes, open_nodes 9개이고, 리소스로 memory://knowledge-graph도 제공한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "README는 기본 저장 위치를 '서버 디렉터리의 memory.jsonl'이라고만 적고 환경변수 MEMORY_FILE_PATH로 JSONL 파일 경로를 바꿀 수 있다고 한다. 소스(index.ts)는 기본 경로를 실행되는 index 파일이 있는 디렉터리(import.meta.url 기준)의 memory.jsonl로 계산한다. 즉 npx로 실행하면 패키지가 풀린 캐시 디렉터리 안이 되어, 사용자가 찾기 쉬운 위치가 아닐 수 있다(실제 경로는 실행해 보지 않아 미확인).",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/index.ts",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07",
+      "note": "README와 소스 원문 근거이며 실제 실행 경로는 미검증"
+    },
+    {
+      "claim": "소스는 MEMORY_FILE_PATH가 상대 경로이면 같은 서버 디렉터리 기준으로 해석하고, 절대 경로는 그대로 쓰며, 맨 앞의 ~는 홈 디렉터리로 확장한다. 같은 디렉터리에 옛 memory.json이 있고 새 memory.jsonl이 없으면 이름을 바꿔 이전한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/index.ts",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07",
+      "note": "소스 읽기 기반이며 실행 확인 아님"
+    },
+    {
+      "claim": "소스는 저장할 때 임시 파일에 쓴 뒤 이름을 바꾸는 방식을 쓰고, 로드할 때 잘못된 줄은 경고와 함께 건너뛴다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/index.ts",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07",
+      "note": "소스 읽기 기반이며 실행 확인 아님"
+    },
+    {
+      "claim": "Windows 설치 예시: memory README와 루트 README 모두 Windows에서는 npx를 cmd /c로 감싸라고 하며, command를 cmd, args를 [/c, npx, -y, @modelcontextprotocol/server-memory]로 적은 JSON 예시를 둔다. 환경변수를 쓰는 Windows 예시에서도 MEMORY_FILE_PATH 값은 '/path/to/custom/memory.jsonl'이라는 POSIX 형태 자리표시자로 적혀 있다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "memory README의 설정 예시는 Claude Desktop(claude_desktop_config.json)과 VS Code 기준이다. README에는 Claude Code용 'claude mcp add' 명령이 없다(grep 결과 'claude code', 'claude mcp' 언급 0건).",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "Docker 예시는 'docker run -i -v claude-memory:/app/dist --rm mcp/memory'이며 볼륨 claude-memory를 /app/dist에 마운트한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "런타임 요구: 패키지는 TypeScript 서버이며 @modelcontextprotocol/sdk ^1.30.0과 zod ^4.0.0에 의존한다. package.json의 이름·설명·mcpName은 각각 @modelcontextprotocol/server-memory, 'MCP server for enabling memory for Claude through a knowledge graph', io.github.modelcontextprotocol/server-memory다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/package.json",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "README는 모델이 메모리를 언제 어떤 종류로 만들지는 사용자 프롬프트에 달려 있다고 하고, 채팅 개인화용 예시 프롬프트를 제시한다. 이 예시는 나이·성별·위치·직업 같은 기본 신원, 관계 등을 기억 대상으로 열거한다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07"
+    },
+    {
+      "claim": "memory README에는 텔레메트리·analytics·권한·네트워크·프라이버시를 다루는 설명이 없다(grep 확인 범위 내 언급 없음). 이는 코드가 외부로 아무것도 보내지 않는다는 뜻이 아니다.",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-07",
+      "note": "README 미기재만 확인. index.ts에서 파일 읽기·쓰기(fs)는 확인했으나 네트워크 호출 전수 검사는 하지 않았다."
+    }
+  ],
+  "install_commands": [
+    "npx -y @modelcontextprotocol/server-memory",
+    "Windows(설정 JSON): command \"cmd\", args [\"/c\", \"npx\", \"-y\", \"@modelcontextprotocol/server-memory\"]",
+    "환경변수: MEMORY_FILE_PATH=<memory.jsonl 경로>",
+    "docker run -i -v claude-memory:/app/dist --rm mcp/memory"
+  ],
+  "install_commands_note": "미검증. 사람이 실제로 실행하기 전까지 문서상의 명령이다. 위 형태는 모두 README의 JSON 설정 예시(Claude Desktop/VS Code 기준)이며, Claude Code에서 쓰는 명령은 README에 없어 이 파일에 적지 않았다.",
+  "hands_on_test": {
+    "source_kind": "hands_on",
+    "source_url": "data/research/memory-sandbox-record-2026-10-07.md",
+    "tested_at": "2026-10-07",
+    "fetched_at": "2026-10-09",
+    "claude_code_version": "2.1.292",
+    "extension_version": "@modelcontextprotocol/server-memory 2026.8.31 (npm view 결과와 npx 캐시 package.json 모두 동일)",
+    "os": "Windows (Git Bash), Node v24.21.0",
+    "environment_info": [
+      {"text": "Claude Code v2.1.292, Node v24.21.0, Windows, Git Bash", "source_kind": "hands_on"},
+      {"text": "npm view @modelcontextprotocol/server-memory version 결과 2026.8.31. 실제 설치본(npx 캐시 package.json)의 version도 2026.8.31", "source_kind": "hands_on"},
+      {"text": "등록 명령: claude mcp add memory -- npx -y @modelcontextprotocol/server-memory (local 범위, 설정은 C:\\Users\\Joh\\.claude.json 의 memory_mcp_sandbox 프로젝트 항목)", "source_kind": "hands_on"},
+      {"text": "cmd /c 로 감싸지 않고 npx만으로 등록했고 /mcp 에서 connected 로 표시됨", "source_kind": "hands_on"},
+      {"text": "/mcp 화면: Capabilities는 tools, resources이고 도구는 9개", "source_kind": "hands_on"}
+    ],
+    "environment_caveats": [
+      "시험 폴더는 claude_blog와 분리한 별도 샌드박스(memory_mcp_sandbox)였다.",
+      "사용자가 직접 수행한 시험이며, 아래 관찰은 사용자가 전달한 내용과 읽기 전용 파일 확인에 근거한다."
+    ],
+    "observations": [
+      {"text": "도구 9개: create_entities, create_relations, add_observations, delete_entities, delete_observations, delete_relations, read_graph, search_nodes, open_nodes. /mcp 화면에서 delete 3개는 destructive, read_graph/search_nodes/open_nodes는 read-only로 표시됐다.", "source_kind": "hands_on"},
+      {"text": "저장 시험 1: 사용자가 별명과 좋아하는 컵라면을 메모리 서버에 기억해 달라고 입력하자 Claude는 memory를 2번 호출했고 엔티티 이름 User(person)로 저장했다고 답했다.", "source_kind": "hands_on"},
+      {"text": "MEMORY_FILE_PATH 미지정 시 기본 저장 위치는 npx 캐시 폴더 안 C:/Users/Joh/AppData/Local/npm-cache/_npx/15b07286cbcc3329/node_modules/@modelcontextprotocol/server-memory/dist/memory.jsonl 이었고 134바이트, 수정 시각 2026-10-07 19:27이었다.", "source_kind": "hands_on"},
+      {"text": "memory.jsonl 내용(읽기 전용 확인, 2026-10-09): 한 줄 JSON {\"type\":\"entity\",\"name\":\"User\",\"entityType\":\"person\",\"observations\":[\"별명은 Buldak\",\"좋아하는 컵라면은 Buldak 볶음면\"]}. 2026-10-09에 다시 확인했을 때도 134바이트, 수정 시각 19:27로 첫 저장 이후 바뀌지 않았다.", "source_kind": "hands_on"},
+      {"text": "사용자가 말한 문장 그대로가 아니라 Claude가 정리한 문장이 저장됐다. 엔티티 이름은 이후 시험에서 소문자 user로 달라졌다(Claude가 그때그때 정함).", "source_kind": "hands_on"},
+      {"text": "한글 저장은 깨지지 않았다(cp949 문제 같은 현상 없음). 파일은 평문 JSONL이다.", "source_kind": "hands_on"},
+      {"text": "새 세션 시험: claude를 껐다 켜고 힌트 없이 '내 별명이 뭐였지?'라고 물으니 Claude가 스스로 memory를 호출해 Buldak과 Buldak 볶음면을 답했다(1회).", "source_kind": "hands_on"},
+      {"text": "이어서 메모리 서버에서 찾아 달라고 물었을 때는 같은 내용을 답했으나 화면에 도구 호출 표시가 없어 같은 세션의 앞선 결과를 재사용했을 수 있다(1회).", "source_kind": "hands_on"},
+      {"text": "저장 위치 지정 시험: claude mcp remove memory 후 claude mcp add memory -e MEMORY_FILE_PATH=C:/Users/Joh/Desktop/project/memory_mcp_sandbox/my-memory.jsonl -- npx -y @modelcontextprotocol/server-memory 로 다시 등록했고, 그 경로에 my-memory.jsonl이 실제로 생성됐다(120바이트, 2026-10-07 20:38). 슬래시 형태의 Windows 절대 경로가 통했다.", "source_kind": "hands_on"},
+      {"text": "저장 위치를 MEMORY_FILE_PATH로 바꾼 뒤 '내 별명이 뭐였지?'라고 물으니 Claude가 '저장된 기억에서 별명을 찾지 못했습니다. 파일 기반 메모리(MEMORY.md)는 아직 없고, MCP 메모리 그래프도 비어 있습니다.'라고 답했다. Buldak 기록은 보이지 않았다.", "source_kind": "hands_on"},
+      {"text": "이어서 거주지(서울)와 취미(축구)를 메모리 서버에 기억해 달라고 하자 Claude는 memory를 1번 호출했고 user 항목에 '서울에 거주한다', '취미는 축구이다'를 넣었다고 답했다.", "source_kind": "hands_on"},
+      {"text": "사용자가 확인한 my-memory.jsonl: 120바이트, 수정 시각 2026-10-07 20:38, 한 줄 JSON {\"type\":\"entity\",\"name\":\"user\",\"entityType\":\"person\",\"observations\":[\"서울에 거주한다\",\"취미는 축구이다\"]}.", "source_kind": "hands_on"},
+      {"text": "위치를 바꾼 뒤에도 옛 캐시 폴더의 memory.jsonl은 134바이트, 2026-10-07 19:27 그대로 남아 있었다. 옛 기록은 옛 파일에 남고, 새 서버는 새 파일에서 새로 시작했다. 엔티티 User와 user는 서로 다른 파일에 하나씩 있었다.", "source_kind": "hands_on"},
+      {"text": "두 파일 모두 평문 JSON Lines였다. 암호화나 접근 제한은 관찰되지 않았다.", "source_kind": "hands_on"},
+      {"text": "설치본 package.json(npm 게시본)의 dependencies는 @modelcontextprotocol/sdk ^1.30.0 하나뿐이고 zod는 없었다.", "source_kind": "hands_on"},
+      {"text": "2026-10-09 사용자가 설치본 dist/index.js(2026.8.31)를 grep과 sed로 직접 확인했다. loadGraph는 UTF-8로 읽어 줄 단위로 나누고 줄마다 JSON.parse를 한다. type이 entity나 relation인 줄만 담고 그 외 type은 아무 메시지 없이 무시한다. 줄별 try/catch는 보이지 않고, 바깥 catch는 ENOENT일 때만 빈 그래프를 돌려주고 다른 오류는 다시 던진다. 로드 함수에 스키마 검증은 보이지 않았다. 'Skipping'과 'record.type' 문자열은 파일에 없었다. 깨진 줄에 대한 실제 동작은 시험하지 않았다.", "source_kind": "hands_on"},
+      {"text": "saveGraph는 같은 디렉터리의 임시 파일(이름은 메모리 파일명 뒤에 랜덤 16바이트 16진수와 .tmp)에 쓴 뒤 rename으로 덮어쓴다. 설치본 주석과 코드에서 확인했다.", "source_kind": "hands_on"},
+      {"text": "같은 날 받은 main의 src/memory/index.ts에는 'Skipping malformed line in memory file', 'Skipping non-object line in memory file' 경고와 entity, relation 검증(safeParse)이 있고(120, 125, 131, 141행 부근), 임시 파일 후 rename도 있다(193, 194행 부근). 설치본과 main의 로드 동작은 서로 다르다.", "source_kind": "hands_on"}
+    ],
+    "inferred_not_confirmed": [
+      "main의 로드 시 검증 코드는 npm 2026.8.31 게시(2026-08-31) 이후 커밋(2026-09-03)에서 들어왔을 가능성이 있으나, 커밋 단위로 확인하지 않았다.",
+      "깨진 JSON 한 줄이 있으면 설치본의 로드가 통째로 실패할 것이라는 기대는 코드(줄별 try/catch 없음, 바깥 catch는 ENOENT만 처리)에서 추론한 것이며 시험하지 않았다."
+    ],
+    "unverified": [
+      "새 세션 시험의 두 번째 질문이 실제로 도구를 호출했는지(각 1회뿐, 재현성 미확인)",
+      "같은 파일 안에서 엔티티 이름이 달라지면 항목이 중복되는지(시험하지 않음. 두 엔티티는 서로 다른 파일에 하나씩 있었음)",
+      "캐시 정리나 버전 변경 시 기본 저장 파일이 사라지는지(시험하지 않음)",
+      "질문이 달라져도 Claude가 자동으로 조회하는지(힌트 없는 질문 1회 관찰뿐)",
+      "delete_* 도구의 실제 동작",
+      "네트워크 호출 여부",
+      "create_relations의 저장 형식",
+      "도구 호출 승인 프롬프트",
+      "다른 PC나 다른 버전(OS, Claude Code, 서버)에서의 동작. cmd /c 불필요도 이 PC 한 대 기준"
+    ],
+    "excluded_as_evidence": [],
+    "reproduction_scope": "Windows + Git Bash + Claude Code 2.1.292 + Node v24.21.0 + local 범위 등록, 서버 2026.8.31"
+  },
+  "conflicts_with_existing_claims": [
+    {
+      "existing": "claims의 런타임 요구: '@modelcontextprotocol/sdk ^1.30.0과 zod ^4.0.0에 의존한다'",
+      "hands_on": "실제 설치된 npm 게시본(2026.8.31)의 package.json dependencies에는 sdk ^1.30.0만 있고 zod는 없었다. 기존 claim은 저장소 main의 package.json 기준으로 보인다.",
+      "rule": "글에는 hands_on_test와 설치본 기준을 우선한다."
+    },
+    {
+      "existing": "research_notes의 '설치·실행하지 않았다', 'hands_on_test는 만들지 않았다'",
+      "hands_on": "2026-10-07에 사용자가 직접 설치·실행했고 hands_on_test가 추가됐다. 해당 문장은 조사 시점(2026-10-07 조사 단계) 기준으로만 맞다.",
+      "rule": "글에는 hands_on_test를 우선한다."
+    },
+    {
+      "existing": "기본 저장 위치 관련: claim의 '실제 경로는 실행해 보지 않아 미확인', watch_outs의 '(추정, 실행 확인 전)', writing_notes의 '단정적으로 쓰지 않는다'",
+      "hands_on": "MEMORY_FILE_PATH 미지정 시 npx 캐시 안 .../server-memory/dist/memory.jsonl에 저장됐다(134바이트). 소스 기반 설명과 일치한다. 캐시 정리 시 사라지는지는 여전히 미확인이다.",
+      "rule": "글에는 hands_on_test와 설치본 기준을 우선하되, 이 PC 한 대 기준이라는 한정을 붙인다."
+    },
+    {
+      "existing": "Windows 관련: README의 cmd /c 래핑 안내(claim), watch_outs의 'cmd /c 래핑이 필요한지 미확인'과 'Windows 경로 동작 미확인'",
+      "hands_on": "cmd /c 없이 npx만으로 등록해 /mcp에서 connected였고, C:/... 슬래시 형태의 MEMORY_FILE_PATH로 파일이 생성됐다. 역슬래시 경로 등 다른 표기는 시험하지 않았다.",
+      "rule": "글에는 hands_on_test와 설치본 기준을 우선하되, 이 PC 한 대 기준이라는 한정을 붙인다."
+    },
+    {
+      "existing": "설치 명령 관련: install_commands_note의 'Claude Code에서 쓰는 명령은 README에 없어 적지 않았다', writing_notes의 'Claude Code에서 설치하는 명령은 직접 확인하기 전에는 쓰지 않는다'",
+      "hands_on": "claude mcp add memory -- npx -y @modelcontextprotocol/server-memory (local 범위)로 등록해 connected를 확인했고, 위치 지정은 -e MEMORY_FILE_PATH=... 로 했다. README에 있는 명령은 아니다.",
+      "rule": "글에는 hands_on_test와 설치본 기준을 우선하되, README에 없는 명령임을 밝힌다."
+    },
+    {
+      "existing": "watch_outs의 'Claude Code 쪽 동작(설치 범위, 도구 이름 접두사, 승인 프롬프트)은 미확인'",
+      "hands_on": "local 범위 등록, /mcp의 Capabilities(tools, resources)와 도구 9개, destructive/read-only 표시는 확인됐다. 도구 이름 접두사와 승인 프롬프트는 관찰 기록에 없어 여전히 미확인이다.",
+      "rule": "글에는 hands_on_test를 우선하고, 관찰되지 않은 부분은 계속 미확인으로 쓴다."
+    },
+    {
+      "existing": "claims의 '로드할 때 잘못된 줄은 경고와 함께 건너뛴다'",
+      "hands_on": "이 claim은 main 기준이고 설치본(2026.8.31)의 dist/index.js에는 해당 코드가 없다. 설치본은 줄별 오류 처리 없이 JSON.parse를 하고, 알 수 없는 type은 조용히 무시한다.",
+      "rule": "글에는 설치본 기준을 우선한다."
+    }
+  ],
+  "watch_outs": [
+    "이름·소유 혼동 가능성: 지식 그래프 메모리를 표방하는 비슷한 서버가 따로 있을 수 있다. 이번에는 동명 포크·복사본을 검색하지 않아 미확인이다. 등재 위치는 modelcontextprotocol/servers 모노레포(src/memory)와 npm 패키지 @modelcontextprotocol/server-memory이고, package.json의 mcpName으로 보아 MCP Registry에도 io.github.modelcontextprotocol/server-memory로 등재된 것으로 보이나 레지스트리 페이지는 확인하지 않았다.",
+    "라이선스: 루트 README 문구(신규 Apache-2.0, 기존 MIT)와 루트 LICENSE(이전 중이라는 설명과 Apache 2.0 전문 + MIT 본문 병기), memory package.json('SEE LICENSE IN LICENSE'), GitHub API 분류(NOASSERTION)가 서로 같은 방식으로 단정하지 않는다. 글에서는 모순이 아니라 이전 중이라는 원문 설명 그대로 쓰고, 'Apache-2.0이다' 또는 'MIT다'로 단정하지 않는다.",
+    "'교육용 예시': 저장소가 참조 구현이며 프로덕션용이 아니라고 스스로 밝힌다. 장기 사용·민감 정보 저장에 권하는 도구로 쓰지 않는다.",
+    "기본 저장 위치: README는 '서버 디렉터리'라고만 쓰고 소스는 패키지 설치 위치 기준이다. npx 캐시 안에 쌓이면 캐시 정리나 버전 변경 때 메모리가 사라지거나 찾기 어려울 수 있다(추정, 실행 확인 전). 시험 때는 MEMORY_FILE_PATH를 명시하고 실제 파일 위치를 눈으로 확인해야 한다.",
+    "Windows: README 예시의 MEMORY_FILE_PATH가 POSIX 형태 자리표시자다. Windows 경로(드라이브 문자, 역슬래시, JSON 이스케이프)에서의 동작은 확인하지 못했다. cmd /c 래핑이 Claude Code에서도 필요한지는 미확인이다.",
+    "버전 표기: 저장소 main의 package.json 버전은 0.6.3인데 npm 최신은 2026.8.31이다. 두 표기가 다르므로 글에는 실제로 설치한 npm 버전을 쓰고 main의 package.json 숫자는 쓰지 않는다.",
+    "저장 내용: README의 예시 프롬프트가 신원·관계 같은 개인 정보를 기억하게 유도한다. 메모리 파일에 실제로 어떤 내용이 평문 JSONL로 쌓이는지는 시험에서 확인해야 한다. 이 저장소에서 시험할 때 메모리 파일이 저장소 안(Git 추적 대상)에 만들어지지 않도록 경로를 저장소 밖으로 지정한다.",
+    "Claude Code 쪽 동작(설치 범위, 도구 이름 접두사, 승인 프롬프트)은 이 조사에서 공식 문서를 읽지 않아 미확인이다.",
+    "Claude Code 자체 메모리(CLAUDE.md 등)와의 기능 비교는 아직 근거 자료가 없다. 비교하려면 공식 문서 조사와 직접 시험이 먼저 필요하다."
+  ],
+  "writing_notes": [
+    "91,000+ 스타·11,000+ 포크는 modelcontextprotocol/servers 모노레포 수치다. memory 서버 수치처럼 쓰지 않는다.",
+    "라이선스를 한 줄로 단정하지 않는다(watch_outs 참고).",
+    "'유지된다'는 표현은 '2026-09-03에 memory 경로 커밋, npm 2026.8.31 게시가 확인됨'처럼 날짜를 붙여서만 쓴다.",
+    "README 문장은 패러프레이즈한다. 'educational examples' 같은 인용이 필요하면 15단어 미만으로 한 번만 쓴다.",
+    "memory README에 없는 항목(권한, 네트워크, 텔레메트리)은 '언급 없음'이지 '없다'가 아니다.",
+    "기본 저장 위치를 단정적으로 쓰지 않는다. 직접 실행해 확인하기 전에는 '소스상 패키지 디렉터리 기준'까지만 쓴다.",
+    "Claude Code에서 설치하는 명령은 직접 확인하기 전에는 쓰지 않는다. README 예시는 Claude Desktop 기준이다."
+  ]
+}

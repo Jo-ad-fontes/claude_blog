@@ -1,0 +1,353 @@
+{
+  "slug": "mcp-memory-server-review",
+  "checked_at": "2026-10-09",
+  "verdict": "WARNING",
+  "run": 3,
+  "previous_run": "WARNING (같은 날 2회차). 이 파일이 덮어썼다.",
+  "claims_checked": 27,
+  "method": [
+    "초안의 모든 사실 문장을 근거 자료(조사 JSON, hands_on_test, 샌드박스 기록)와 직접 대조했다.",
+    "이번에 바뀐 소스 동작 문장은 외부 출처 대조 대상이 아니라 hands_on_test의 새 관찰 3건(2026-10-09 사용자가 설치본 dist/index.js와 main의 index.ts를 직접 확인)과 대조했다.",
+    "수정되지 않은 외부 출처 클레임은 같은 날 claim-verifier 7개의 판정과 2회차의 curl + grep -i 원문 확인을 그대로 재사용했다(출처 URL과 클레임이 같다). 이번에는 verifier를 새로 호출하지 않았다."
+  ],
+  "changed_sentence_check": {
+    "draft_location": "Key features, 'Per the source, saving writes to a temporary file…' 항목",
+    "compared_with": "data/research/modelcontextprotocol-servers-memory.json hands_on_test.observations 마지막 3건(18건 중 16~18번) 및 inferred_not_confirmed",
+    "sentence_results": [
+      {
+        "sentence": "saving writes to a temporary file and then renames it over the memory file; I also saw this in the installed 2026.8.31 build",
+        "verdict": "PASS",
+        "evidence": "관찰 17: saveGraph는 같은 디렉터리의 임시 파일(메모리 파일명 + 랜덤 16바이트 16진수 + .tmp)에 쓴 뒤 rename으로 덮어쓴다. 설치본 주석과 코드에서 확인."
+      },
+      {
+        "sentence": "loading reads the file as UTF-8, splits it into lines and parses each line with JSON.parse",
+        "verdict": "PASS",
+        "evidence": "관찰 16: loadGraph는 UTF-8로 읽어 줄 단위로 나누고 줄마다 JSON.parse를 한다."
+      },
+      {
+        "sentence": "Lines whose type is entity or relation are kept, and a line with any other type is ignored silently",
+        "verdict": "PASS",
+        "evidence": "관찰 16: type이 entity나 relation인 줄만 담고 그 외 type은 아무 메시지 없이 무시한다. 2회차 verifier가 main에서 본 '알 수 없는 type은 조용히 무시'와도 모순 없다."
+      },
+      {
+        "sentence": "I saw no per-line error handling there",
+        "verdict": "PASS",
+        "evidence": "관찰 16: 줄별 try/catch는 보이지 않았다. 로드 함수에 스키마 검증도 보이지 않았다."
+      },
+      {
+        "sentence": "so I would expect one line that is not valid JSON to make the whole load fail instead of being skipped",
+        "verdict": "WARNING",
+        "evidence": "관찰 16의 바깥 catch(ENOENT만 빈 그래프, 다른 오류는 재던짐)에서 추론한 문장이다. '기대한다'로 추측임을 밝히고 바로 뒤에 시험하지 않았다고 적어 단정은 아니다. 다만 이 추론 자체는 inferred_not_confirmed에 기록돼 있지 않다.",
+        "fix": "초안 수정은 필요 없다. 조사 JSON의 inferred_not_confirmed에 '깨진 JSON 한 줄이 전체 로드를 실패시킬 것이라는 추론(시험하지 않음)'을 추가하면 기록이 일관된다.",
+        "resolution": {
+          "status": "resolved",
+          "resolved_at": "2026-10-09",
+          "how": "조사 JSON hands_on_test.inferred_not_confirmed에 해당 추론 문장을 추가함"
+        }
+      },
+      {
+        "sentence": "I read this in the code and did not test it",
+        "verdict": "PASS",
+        "evidence": "관찰 16: 깨진 줄에 대한 실제 동작은 시험하지 않았다."
+      },
+      {
+        "sentence": "The repository's current main branch has extra validation and \"Skipping malformed line\" warnings that I did not find in the installed file, so I do not assume main's behavior for this release",
+        "verdict": "PASS",
+        "evidence": "관찰 18: main의 src/memory/index.ts에 'Skipping malformed line in memory file', 'Skipping non-object line in memory file' 경고와 entity, relation 검증(safeParse)이 있다(120, 125, 131, 141행 부근). 관찰 16: 설치본에는 'Skipping' 문자열이 없다. 설치본과 main의 로드 동작은 다르다고 기록됨."
+      }
+    ],
+    "overall": "WARNING (추론 문장 1건의 기록 누락만 남음). 사실 오류 없음.",
+    "resolved_from_run_2": "2회차 WARNING '소스 동작 서술이 WebFetch 요약 기반'은 해소됐다. 이 문장은 이제 사용자의 설치본 직접 확인에 근거한다."
+  },
+  "raw_text_checks": {
+    "downloads": [
+      {
+        "command": "curl -sSL -o memory-README.md -w \"%{http_code} %{size_download}\\n\" https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+        "result": "HTTP 200, 10850바이트, 351줄 (2회차에 받음, 스크래치패드에 저장)"
+      },
+      {
+        "command": "curl -sSL https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md -o root-README.md",
+        "result": "루트 README 원문 (교차 확인용)"
+      }
+    ],
+    "claude_mcp_add_absent": {
+      "claim": "README에 claude mcp add 명령이 없다",
+      "verdict": "PASS",
+      "greps": [
+        {
+          "command": "grep -ic \"claude mcp\" memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic \"claude code\" memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic \"claude-code\" memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic \"mcp add\" memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic \"claude mcp\" root-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic \"claude code\" root-README.md",
+          "matches": 0
+        }
+      ],
+      "context": "설정 헤딩은 139행 '# Usage with Claude Desktop', 235행 '# VS Code Installation Instructions'."
+    },
+    "telemetry_permissions_network_absent": {
+      "claim": "memory README 전체에 텔레메트리·권한·네트워크 언급이 없다",
+      "verdict": "PASS",
+      "greps": [
+        {
+          "command": "grep -ic telemetry memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic analytics memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic permission memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic network memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic privacy memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic security memory-README.md",
+          "matches": 0
+        },
+        {
+          "command": "grep -ic tracking memory-README.md",
+          "matches": 0
+        }
+      ],
+      "limit": "README에 없다는 확인이며 코드가 외부로 아무것도 보내지 않는다는 뜻이 아니다. 초안도 소스의 네트워크 호출은 점검하지 않았다고 쓴다."
+    },
+    "supporting_greps": [
+      {
+        "command": "grep -ic jsonl memory-README.md",
+        "matches": 3,
+        "note": "로컬 저장 설명 존재"
+      },
+      {
+        "command": "grep -c 'claude-memory:/app/dist' memory-README.md",
+        "matches": 2,
+        "note": "Docker 볼륨 예시 존재"
+      },
+      {
+        "command": "grep -n \"cmd /c\" memory-README.md",
+        "matches": 1,
+        "note": "173행"
+      },
+      {
+        "command": "grep -n \"cmd /c\" root-README.md",
+        "matches": 1,
+        "note": "93행"
+      },
+      {
+        "command": "grep -in \"production|educational|threat model|security requirements\" root-README.md",
+        "matches": 1,
+        "note": "9행에 원문 문구가 모두 있음"
+      },
+      {
+        "command": "grep -in \"Basic Identity\" memory-README.md",
+        "matches": 1,
+        "note": "326행"
+      }
+    ]
+  },
+  "results": [
+    {
+      "claim": "루트 README: 참조 구현·교육용 예시·프로덕션용 솔루션이 아님·위협 모델에 맞는 보안 요건 평가",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "verdict": "PASS",
+      "evidence": "9행 원문 확인(curl+grep)."
+    },
+    {
+      "claim": "운영위원회가 유지하는 소수의 참조 서버만 담는다 / Memory가 Reference Servers 목록에 있다 / 라이선스 문구(신규 Apache-2.0, 기존 MIT)",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/README.md",
+      "verdict": "PASS",
+      "evidence": "verifier 원문 확인(같은 날)."
+    },
+    {
+      "claim": "91,000+ 스타, 11,000+ 포크(모노레포), 아카이브되지 않음",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers",
+      "verdict": "PASS",
+      "evidence": "2026-10-09 stargazers_count=91091, forks_count=11767, archived=false."
+    },
+    {
+      "claim": "2026-10-07 시점 마지막 push 2026-10-05 / 이후 확인에서 2026-10-07 push",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers",
+      "verdict": "PASS",
+      "evidence": "초안이 두 시점을 모두 적었다. 현재 pushed_at=2026-10-07T21:22:09Z."
+    },
+    {
+      "claim": "src/memory 최근 커밋 2026-09-03, npm 2026.8.31 게시 2026-08-31, deprecated 없음",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers/commits?path=src/memory&per_page=5",
+      "verdict": "WARNING",
+      "evidence": "내용 일치(PASS). 출처 성격이 커밋 로그·레지스트리라 source_kind release_notes 분류가 애매.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "이번 글의 오류가 아니라 조사 파일의 분류 문제이고 발행 후 규칙을 논의한다."
+    },
+    {
+      "claim": "라이선스: 루트 LICENSE 이전 중 설명·두 본문 병기 / src/memory/LICENSE 404 / package.json 'SEE LICENSE IN LICENSE'",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/LICENSE",
+      "verdict": "PASS",
+      "evidence": "verifier 확인."
+    },
+    {
+      "claim": "GitHub API 저장소 라이선스 분류 NOASSERTION",
+      "source_url": "https://api.github.com/repos/modelcontextprotocol/servers",
+      "verdict": "WARNING",
+      "evidence": "값 일치. 출처가 API 메타데이터라 source_kind(github_readme) 분류 애매.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "이번 글의 오류가 아니라 조사 파일의 분류 문제이고 발행 후 규칙을 논의한다."
+    },
+    {
+      "claim": "main package.json 버전 0.6.3, 의존성 sdk ^1.30.0과 zod ^4.0.0, npm 최신 2026.8.31",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/package.json",
+      "verdict": "WARNING",
+      "evidence": "값 일치. 출처가 매니페스트·레지스트리라 source_kind 분류 애매.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "이번 글의 오류가 아니라 조사 파일의 분류 문제이고 발행 후 규칙을 논의한다."
+    },
+    {
+      "claim": "memory README: 지식 그래프, 도구 9개, memory://knowledge-graph 리소스, 예시 프롬프트, Docker 예시, 기본 저장 위치 문구",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "verdict": "PASS",
+      "evidence": "verifier 확인과 curl 원문(133, 233, 326행 등) 일치."
+    },
+    {
+      "claim": "소스: 기본 경로는 import.meta.url 기준 index 파일 디렉터리의 memory.jsonl",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/index.ts",
+      "verdict": "WARNING",
+      "evidence": "내용 일치, 시험(npx 캐시 dist/memory.jsonl)이 뒷받침. 출처가 소스 파일이라 source_kind 분류 애매.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "이번 글의 오류가 아니라 조사 파일의 분류 문제이고 발행 후 규칙을 논의한다."
+    },
+    {
+      "claim": "memory/루트 README의 Windows cmd /c 안내",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "verdict": "PASS",
+      "evidence": "memory README 173행, 루트 README 93행 원문 확인."
+    },
+    {
+      "claim": "README에 claude mcp add 명령이 없다 / Claude Desktop과 VS Code 기준",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "verdict": "PASS",
+      "evidence": "curl+grep -i 0건."
+    },
+    {
+      "claim": "README에 텔레메트리·권한·네트워크 언급이 없고 로컬 저장 설명은 있다",
+      "source_url": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/src/memory/README.md",
+      "verdict": "PASS",
+      "evidence": "curl+grep -i 7개 키워드 0건, jsonl 3건, Docker 볼륨 2건."
+    },
+    {
+      "claim": "소스 동작: 저장은 임시 파일 후 rename, 로드는 UTF-8·줄 단위 JSON.parse, entity/relation만 보존, 다른 type은 조용히 무시, 줄별 오류 처리 없음, main에는 경고·검증이 있음",
+      "source_url": "data/research/modelcontextprotocol-servers-memory.json#hands_on_test.observations[16-18]",
+      "verdict": "PASS",
+      "evidence": "changed_sentence_check 참조. 추론 문장 1건은 WARNING으로 별도 기록."
+    },
+    {
+      "claim": "hands_on 서술 전체(등록 명령, connected, cmd /c 없이 등록, 저장·재시작·경로 변경 시험, 134/120바이트, 옛 파일 유지, 평문 JSONL, 한글 정상, 암호화·접근 제한 미관찰)",
+      "source_url": "data/research/memory-sandbox-record-2026-10-07.md",
+      "verdict": "PASS",
+      "evidence": "기록 파일과 hands_on_test와 일치."
+    }
+  ],
+  "other_checks": [
+    {
+      "item": "앞머리",
+      "verdict": "PASS",
+      "evidence": "meta_description 160자 이내, 끊기거나 깨진 값 없음, 값이 근거 자료와 일치."
+    },
+    {
+      "item": "중복 단락",
+      "verdict": "PASS",
+      "evidence": "'A caution worth flagging' 헤딩 1회."
+    },
+    {
+      "item": "숫자·날짜·경로·버전",
+      "verdict": "PASS",
+      "evidence": "2026.8.31, 0.6.3, 134/120바이트, 19:27/20:38, 경로 2개, Claude Code 2.1.292, Node v24.21.0 일치."
+    },
+    {
+      "item": "추적성: 설치본 dist/index.js 확인의 기록 위치",
+      "verdict": "WARNING",
+      "evidence": "새 관찰 3건은 조사 JSON의 hands_on_test에는 있으나, 초안 sources에 있는 기록 파일 memory-sandbox-record-2026-10-07.md에는 없다. 초안 sources는 index.ts(main) URL만 가리킨다.",
+      "fix": "기록 파일에 2026-10-09 설치본 확인 절을 추가하거나 sources에 해당 근거 위치를 적는다(사람 결정).",
+      "resolution": {
+        "status": "resolved",
+        "resolved_at": "2026-10-09",
+        "how": "memory-sandbox-record-2026-10-07.md 끝에 '설치본 코드 직접 확인 (2026-10-09, 사용자 수행)' 절을 추가함"
+      }
+    },
+    {
+      "item": "Scope note: '…as a process Claude Code starts' / claude.ai 원격 커넥터 디렉터리를 보지 않았다",
+      "verdict": "WARNING",
+      "evidence": "사용자가 지시한 조사 범위 진술과 npx 등록·connected 관찰에서 읽히는 해석이다. 조사 파일에 직접 문장이 없다. 사람이 수용 여부를 정한다.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "조사 범위를 밝히는 작성자 진술이다."
+    }
+  ],
+  "unsourced_statements": [],
+  "source_kind_notes": [
+    "조사 JSON이 API 응답, package.json, 커밋 API, npm 레지스트리, 소스 파일을 github_readme 또는 release_notes로 분류해 분류 애매 WARNING이 나왔다. 초안 문장의 오류가 아니라 조사 쪽 분류 문제다. CLAUDE.md의 source_kind는 5종 한정이라 임의로 바꾸지 않았다."
+  ],
+  "remaining_for_human": [],
+  "human_decisions": [
+    {
+      "warning": "source_kind 분류 WARNING (results 중 4건)",
+      "decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "이번 글의 오류가 아니라 조사 파일의 분류 문제이고 발행 후 규칙을 논의한다."
+    },
+    {
+      "warning": "범위 문장(Scope note) WARNING",
+      "decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "조사 범위를 밝히는 작성자 진술이다."
+    },
+    {
+      "warning": "기록 파일 sources 미반영 WARNING",
+      "decision": "resolved",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "기록 파일에 설치본 코드 확인 절을 추가해 해소"
+    },
+    {
+      "warning": "추론 문장 미기록 WARNING",
+      "decision": "resolved",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-09",
+      "rationale": "inferred_not_confirmed에 추가해 해소"
+    }
+  ],
+  "verdict_note": "verdict는 rubric에 따라 WARNING 그대로 둔다. 모든 WARNING이 수용 또는 해소되어 사람의 결정에 따른 예외로 status를 READY_FOR_REVIEW로 올린다."
+}
