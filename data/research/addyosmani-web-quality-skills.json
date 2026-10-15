@@ -1,0 +1,232 @@
+{
+  "candidate_id": "addyosmani-web-quality-skills",
+  "name": "web-quality-skills (addyosmani)",
+  "type": "skill",
+  "category": "skills",
+  "urls": {
+    "official": "https://github.com/addyosmani/web-quality-skills",
+    "github": "https://github.com/addyosmani/web-quality-skills"
+  },
+  "claims": [
+    {
+      "claim": "저장소 addyosmani/web-quality-skills는 스스로를 비공식(unofficial)이며 측정 우선(measurement-first)인 Agent Skills 모음이라고 소개한다. Lighthouse, Chrome DevTools, Core Web Vitals, WCAG, 검색 가이드를 다룬다고 한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "기준: main 브랜치 (커밋 afa8da9). 태그·릴리스는 없음"
+    },
+    {
+      "claim": "저장소는 2,900+ 스타, 250+ 포크다(GitHub API, 2026-10-15). 이 수치는 이 저장소 단독의 것이다. 생성일은 2026-01-18, 마지막 push는 2026-08-24, 기본 브랜치는 main, 보관(archived) 상태가 아니다.",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "GitHub 릴리스와 태그는 API 조회 결과 비어 있었다. 버전은 plugin.json의 2.0.0, 각 SKILL.md의 metadata version \"2.0\"으로만 확인된다.",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills/releases",
+      "source_kind": "release_notes",
+      "fetched_at": "2026-10-15",
+      "note": "releases·tags 두 API 모두 빈 배열. 가장 최근 커밋은 PR #19(Web Quality Skills 2.0) 병합, 2026-08-24"
+    },
+    {
+      "claim": "CHANGELOG는 2.0.0에서 소스 기반 조언에서 증거 기반 감사로 바꿨다고 설명한다. 브라우저 성능 트레이스와 라이브 Lighthouse 감사를 우선하고, 근거 없는 순위 퍼센트와 일반적인 절감 추정치를 제거했으며, 여섯 Skill의 이름과 트리거 문구는 v1과 호환된다고 한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/CHANGELOG.md",
+      "source_kind": "release_notes",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "skills/ 아래에는 accessibility, best-practices, core-web-vitals, performance, seo, web-quality-audit 여섯 폴더가 있고 각각 SKILL.md를 가진다. 일부는 references/ 하위 문서를 갖고, 실행 스크립트는 web-quality-audit/scripts/analyze.sh 하나뿐이다.",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills/git/trees/main?recursive=1",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "트리 목록을 앞쪽 60개 항목까지만 확인했다. 그 뒤에 스크립트가 더 있는지는 미확인"
+    },
+    {
+      "claim": "마켓플레이스 매니페스트(.claude-plugin/marketplace.json)의 마켓플레이스 이름은 addy-web-quality-skills이고 플러그인 이름은 web-quality-skills이며 source는 저장소 루트(./)다. plugin.json은 version 2.0.0, license MIT를 적고 있다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/.claude-plugin/marketplace.json",
+      "source_kind": "official_docs",
+      "fetched_at": "2026-10-15",
+      "note": "plugin.json은 https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/.claude-plugin/plugin.json"
+    },
+    {
+      "claim": "README의 Claude Code 설치 절은 /plugin marketplace add addyosmani/web-quality-skills 후 /plugin install web-quality-skills@addy-web-quality-skills를 안내한다. 설치 후 Skill 이름은 /web-quality-skills:performance 같은 네임스페이스를 갖고 /plugin update로 갱신된다고 한다. 이 플러그인은 수동 복사와 같은 skills/ 디렉터리를 읽는다고 설명한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "README의 다른 설치 방법은 npx skills add addyosmani/web-quality-skills, npx add-skill addyosmani/web-quality-skills, 그리고 skills/* 폴더를 ~/.claude/skills/로 복사하는 것이다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "라이선스는 README(MIT), LICENSE 파일(첫머리 MIT License, Copyright 2026 Addy Osmani), plugin.json(MIT), 각 SKILL.md frontmatter(license: MIT), GitHub API(spdx MIT)가 모두 MIT로 일치한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/LICENSE",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "LICENSE 파일은 curl로 받아 첫 줄만 확인함(1,068바이트). 전문 대조는 하지 않았다"
+    },
+    {
+      "claim": "README는 Chrome DevTools MCP가 있으면 performance_start_trace, lighthouse_audit 등으로 라이브 증거를 우선 쓰고, 없으면 Lighthouse CLI, PageSpeed Insights/CrUX 도구, 수동 확인, 정적 검사로 대체한다고 설명한다. 이 통합은 선택 사항이라고 한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/README.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "도구 이름(performance_start_trace 등)이 실제 Chrome DevTools MCP와 일치하는지는 대조하지 않았다"
+    },
+    {
+      "claim": "web-quality-audit SKILL.md의 도구 라우팅 표는 정적 분석 대체 경로로 scripts/analyze.sh <path>를 안내하며, 이를 렌더링된 페이지 감사의 대체물이 아니라 빠른 스모크 테스트라고 한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/web-quality-audit/SKILL.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "analyze.sh(main, 113줄)는 스스로 읽기 전용(파일 시스템을 바꾸지 않음)이라고 주석에 적고 있고, 읽어 본 코드는 grep·find·jq만 사용한다. HTML 파일에서 doctype, charset, viewport, lang, title 누락, alt 없는 img, http:// URL을 검사해 JSON을 출력한다. jq가 없으면 missing_dependency 오류로 종료한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/web-quality-audit/scripts/analyze.sh",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "코드 전문을 직접 읽었다(실행하지 않음). 기준: main 브랜치. 배포본이 따로 있는 구조는 아님(플러그인이 저장소 루트를 그대로 읽음)"
+    },
+    {
+      "claim": "accessibility SKILL.md의 자동 테스트 예시는 npx lighthouse https://example.com --only-categories=accessibility 와 npm install @axe-core/cli -g (전역 설치)를 포함한다. 이 명령은 문서의 예시이며 Skill이 자동 실행한다는 뜻이 아니다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/accessibility/SKILL.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "Skill 실행 중 Claude가 이 명령을 제안할 가능성이 있다는 해석은 추정이다"
+    },
+    {
+      "claim": "web-quality-audit SKILL.md는 직접 CrUX API는 이미 키가 있거나 자동화를 요청받았을 때만 쓰는 대체 경로로 안내한다.",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/web-quality-audit/SKILL.md",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15"
+    },
+    {
+      "claim": "같은 저장소 이름을 쓰는 외부 복사본이 있다: RUSHYOP/mirror-addyosmani-web-quality-skills(스타 0), costrict-plugins-repo/github-trending-web-quality-skills(스타 0) 등. 이들 코드가 원본과 같은지는 확인하지 않았다.",
+      "source_url": "https://api.github.com/search/repositories?q=web-quality-skills+in:name",
+      "source_kind": "community",
+      "fetched_at": "2026-10-15",
+      "note": "GitHub 저장소 이름 검색 상위 결과만 확인. 다른 마켓플레이스 등재 여부는 확인하지 않음"
+    },
+    {
+      "claim": "서드파티 디렉터리 claudemarketplaces.com이 이 저장소의 Skill 페이지를 싣고 있고, 해당 목록은 설치 수 약 54.8k를 표시한다고 검색 결과 요약에 나왔다. 이 수치는 서드파티 집계이며 직접 확인하지 못했다.",
+      "source_url": "https://claudemarketplaces.com/skills/addyosmani/web-quality-skills",
+      "source_kind": "community",
+      "fetched_at": "2026-10-15",
+      "note": "WebSearch 요약 기반, 페이지 원문 대조 전. 글에서 쓰지 않는 것을 권장"
+    },
+    {
+      "claim": "addyosmani에게는 별도 저장소 agent-skills(code-review-and-quality 등)가 있어 이름이 혼동될 수 있다.",
+      "source_url": "https://agentskillsfinder.com/skills/code-review-and-quality",
+      "source_kind": "community",
+      "fetched_at": "2026-10-15",
+      "note": "WebSearch 요약 기반, 원문 대조 전"
+    },
+    {
+      "claim": "'API 키·토큰·시크릿·자격증명' 문구는 README, 6개 SKILL.md, analyze.sh, CLAUDE.md, AGENTS.md, CHANGELOG에서 일치 0개였다. 'telemetry'는 performance SKILL.md 1곳(실사용자 계측에 관한 설명)에서만 나왔고 이 도구 자체의 데이터 수집 언급은 아니다.",
+      "source_url": "https://github.com/addyosmani/web-quality-skills",
+      "source_kind": "github_readme",
+      "fetched_at": "2026-10-15",
+      "note": "확인 명령: curl로 main의 각 파일을 받아 grep -ciE \"api[_ -]?key|token|secret|credential|telemetry\" README.md accessibility.md best-practices.md core-web-vitals.md performance.md seo.md web-quality-audit.md analyze.sh CLAUDE.md AGENTS.md CHANGELOG.md. api key/token/secret/credential 각 0, telemetry는 performance.md 1. 'README에 언급 없음'일 뿐 코드·외부 도구(Lighthouse, PSI)가 키를 요구하지 않는다는 뜻이 아님. references/ 하위 문서는 이 grep에 포함하지 않았다"
+    }
+  ],
+  "install_commands": [
+    "/plugin marketplace add addyosmani/web-quality-skills",
+    "/plugin install web-quality-skills@addy-web-quality-skills",
+    "npx skills add addyosmani/web-quality-skills",
+    "npx add-skill addyosmani/web-quality-skills",
+    "cp -r skills/* ~/.claude/skills/"
+  ],
+  "install_commands_note": "미검증. 사람이 실제로 실행하기 전까지 문서상의 명령이다. 마켓플레이스·플러그인 이름은 매니페스트와 README가 서로 일치하지만 실제 /plugin 화면 문구는 확인하지 못했다.",
+  "hands_on_test": {
+    "source_kind": "hands_on",
+    "source_url": "data/research/webquality-sandbox-record-2026-10-15.md",
+    "tested_at": "2026-10-15",
+    "fetched_at": "2026-10-15",
+    "claude_code_version": "2.1.300",
+    "extension_version": "web-quality-skills 2.0.0 (installed_plugins.json, plugin.json), gitCommitSha afa8da942115f2961fdbfa80807ea0b232ff6c00",
+    "os": "Windows (Git Bash), Claude Pro, 모델 표시 Sonnet 5.5",
+    "environment_info": [
+      {"text": "Claude Code 2.1.300 (claude --version 출력), 모델 표시 Sonnet 5.5, Claude Pro, Windows(Git Bash)", "source_kind": "hands_on"},
+      {"text": "시험 폴더 ~\\Desktop\\project\\sandbox-webquality (블로그 저장소 밖). 시험 대상은 사용자가 만든 11줄짜리 index.html로, lodash 외부 스크립트, 낮은 대비 글자색(#bbb on #fff), alt 없는 이미지, onclick div, label 없는 input 등을 일부러 넣었다.", "source_kind": "hands_on"},
+      {"text": "설치본 확인(읽기 전용): installed_plugins.json에 scope local, version 2.0.0, installedAt 2026-10-15T08:14:39Z, gitCommitSha afa8da9, projectPath가 sandbox-webquality로 기록돼 있다.", "source_kind": "hands_on"},
+      {"text": "설치된 SKILL.md 6개와 analyze.sh는 줄 끝 CR을 무시하면 같은 날 받은 main(afa8da9)의 파일과 동일했다. 설치본은 CRLF, main은 LF다. references/ 하위 문서는 비교하지 않았다.", "source_kind": "hands_on"}
+    ],
+    "environment_caveats": [
+      "시험 폴더는 블로그 저장소와 분리한 별도 샌드박스(sandbox-webquality)였고 플러그인은 local 범위로 설치됐다.",
+      "관찰은 사용자가 시험 중 찍은 화면 캡처 6장을 보고 정리한 메모(webquality-sandbox-notes-2026-10-15.md)에 근거한다. 캡처 이미지는 기록 작성 시 받지 못했다.",
+      "jq는 조사 단계에서 이 PC에 없는 것으로 확인됐다.",
+      "각 요청을 한 번씩만 시험했다."
+    ],
+    "observations": [
+      {"text": "/plugin marketplace add addyosmani/web-quality-skills 실행 시 'Successfully added marketplace: addy-web-quality-skills'가 표시됐다.", "source_kind": "hands_on"},
+      {"text": "/plugin install web-quality-skills@addy-web-quality-skills 실행 시 '✓ Installed web-quality-skills. Plugin is now active.'가 표시됐다. 마켓플레이스 이름과 설치 명령이 조사 문서의 명령과 일치했다.", "source_kind": "hands_on"},
+      {"text": "/reload-plugins는 plugin install 전에 실행돼 'Reloaded: 4 plugins · 28 skills · 6 agents · 1 hook · 7 plugin MCP servers · 0 plugin LSP servers'가 표시됐다. 설치 후 개수는 보지 않았다.", "source_kind": "hands_on"},
+      {"text": "시험 1 'index.html을 웹 품질 관점에서 점검해줘. 파일은 고치지 말고 보고서만 줘.': Skill(web-quality-skills:web-quality-audit)이 발동했다. 파일을 수정하지 않았고, 소스만 읽고 점검했다고 밝혔으며, 브라우저 실측(Lighthouse, 트레이스)과 LCP·INP·CLS 수치는 측정하지 않았다고 명시했다.", "source_kind": "hands_on"},
+      {"text": "시험 1 보고서는 항목 9개를 Critical/High, Medium, Low로 나눴고 영역 요약 표에서 성능(미측정, 소스상 우려 1건), 접근성(심각), SEO(부족), Best Practices(부족), Agentic Browsing(낮음)으로 표시했다.", "source_kind": "hands_on"},
+      {"text": "시험 1에서 글자색 대비 1.9:1(#bbb on #fff)을 지적하고 권장색 #767676(4.54:1)을 제시했다. 두 대비값은 WCAG 상대 휘도 공식으로 따로 계산해 확인했다(#bbb on #fff = 1.92:1, #767676 on #fff = 4.54:1, 시험 후 별도 계산).", "source_kind": "hands_on"},
+      {"text": "시험 1 보고서는 마지막에 수정 후 Lighthouse와 성능 트레이스를 같은 조건에서 다시 돌려야 한다고 적었고, 근거 없는 개선율(%)은 화면에 없었다.", "source_kind": "hands_on"},
+      {"text": "시험 2 '접근성만 따로 봐줘.': Skill(web-quality-skills:accessibility)가 발동했다. 'index.html 접근성 점검 (WCAG 2.2)' 제목 아래 총 8건(Critical 4, Serious 3, Moderate 1)을 WCAG 기준 번호와 줄 번호와 함께 보여 줬다.", "source_kind": "hands_on"},
+      {"text": "시험 2에서 Lighthouse, axe, 스크린리더, 키보드 실측은 하지 않았다고 명시했고 파일은 수정하지 않았다. 현재 소스로는 판단할 수 없는 항목(포커스 표시, 대상 크기, 확대/리플로우 등)을 따로 구분해 적었다.", "source_kind": "hands_on"},
+      {"text": "시험 3 '사이트 속도를 개선해줘': Skill(web-quality-skills:performance)이 호출됐고 'Successfully loaded skill'이 표시됐다.", "source_kind": "hands_on"},
+      {"text": "시험 3에서 index.html을 직접 수정했다(Write, 6줄 추가 3줄 삭제): lodash script 제거, <!DOCTYPE html>·meta charset·meta viewport 추가, 이미지에 max-width:100%;height:auto 추가. 수정 전 파일 수정 확인 질문은 화면에 없었다.", "source_kind": "hands_on"},
+      {"text": "시험 3 보고서는 브라우저로 측정하지 못해서 효과는 코드를 읽고 판단한 것이며 수정 전 수치가 없어 전후 비교가 불가하다고 명시했다. Lighthouse는 돌리지 않았다.", "source_kind": "hands_on"},
+      {"text": "시험 3에서 속도와 무관하다고 보고 접근성 문제(대비, onclick div, label, alt, lang)는 그대로 뒀고, 이미지 최적화·캐시·서버 설정은 이 파일만으로 확인 불가라고 구분했다.", "source_kind": "hands_on"},
+      {"text": "세 번의 시험 모두에서 analyze.sh 실행이나 jq 관련 오류는 화면에 나오지 않았다고 사용자가 확인했다.", "source_kind": "hands_on"}
+    ],
+    "inferred_not_confirmed": [
+      "analyze.sh가 실행되지 않은 이유는 확인하지 못했다. Claude가 index.html을 직접 읽어서 점검했기 때문일 수 있으나 추정일 뿐이다.",
+      "시험 3에서 파일을 고친 것은 요청 문구('개선해줘')가 수정을 암시했기 때문일 가능성이 있으나 같은 조건을 반복해 확인하지 않았다."
+    ],
+    "unverified": [
+      "analyze.sh의 실제 실행과 jq 없는 PC에서의 오류 메시지(관찰 없음)",
+      "설치 후 스킬 개수와 /plugin 화면",
+      "전역 npm 설치(@axe-core/cli)나 npx lighthouse를 Claude가 제안하는지(캡처 범위에서 보이지 않음)",
+      "실제 Lighthouse 점수 변화(측정하지 않음)",
+      "seo, best-practices, core-web-vitals 스킬(시험하지 않음)",
+      "Chrome DevTools MCP를 쓰는 경로(시험하지 않음)",
+      "각 요청 1회 관찰뿐이라 '항상 소스만 읽는다', '항상 파일을 고친다' 같은 일반화 불가",
+      "다른 PC나 다른 버전(OS, Claude Code, 플러그인)에서의 동작"
+    ],
+    "excluded_as_evidence": [],
+    "reproduction_scope": "Windows + Git Bash + Claude Code 2.1.300 + web-quality-skills 2.0.0(afa8da9) + local 범위 설치 + 사용자 제작 11줄 index.html, 요청 각 1회"
+  },
+  "conflicts_with_existing_claims": [
+    {
+      "existing": "claims와 시험 전 기록: 이 조사는 '후보를 설치·실행하지 않았다'는 조건에서 작성됐고 hands_on_test가 없었다. install_commands_note는 '실제 /plugin 화면 문구는 확인하지 못했다'고 적고 있다.",
+      "hands_on": "2026-10-15에 사용자가 직접 설치·실행했다. marketplace add와 plugin install 화면 문구가 확인됐고 마켓플레이스 이름 addy-web-quality-skills와 설치 명령이 문서와 일치했다.",
+      "rule": "글에는 hands_on_test를 우선한다. 위 문장은 조사 시점 기준으로만 맞다."
+    },
+    {
+      "existing": "claims의 README 설명: 이 Skill 모음은 측정 우선(measurement-first)·증거 기반이고, 성능 작업은 CrUX·RUM으로 우선순위를 정하고 DevTools 트레이스로 원인을 진단한다.",
+      "hands_on": "Chrome DevTools MCP가 없는 이 환경의 시험 3('사이트 속도를 개선해줘', 1회)에서 performance 스킬은 측정 없이 index.html을 수정했다(Write, 6줄 추가 3줄 삭제). 보고서에는 측정하지 못했고 전후 비교가 불가하다고 명시했다. 시험 1·2에서는 측정하지 않았다고 밝히고 수정하지 않았다.",
+      "rule": "글에는 README의 설명과 시험 결과를 구분해 쓴다. '측정 우선이라고 밝히지만 측정 도구가 없는 이 시험의 1회 관찰에서는 코드를 읽고 수정했고, 그 한계를 보고서에 명시했다'로 쓰고 일반화하지 않는다."
+    },
+    {
+      "existing": "watch_outs: 'analyze.sh는 jq가 필수이며 jq가 없으면 Windows Git Bash에서 정적 분석 경로 시험이 막힐 수 있다.'",
+      "hands_on": "jq가 없는 이 PC의 세 번의 시험에서 analyze.sh 실행이나 jq 오류는 관찰되지 않았다. Claude가 어떤 방식으로 소스를 읽었는지는 화면 기록에 없다.",
+      "rule": "글에는 hands_on_test를 우선한다. 'jq 없이도 점검이 진행됐다'까지만 쓰고, analyze.sh가 실행됐는지·왜 안 됐는지는 미확인으로 둔다."
+    }
+  ],
+  "watch_outs": [
+    "실행 스크립트는 analyze.sh 하나이며 jq가 필수다. 이 PC에서 command -v jq는 아무것도 출력하지 않았다(node 24.21.0, npx, python은 있음). jq가 없으면 analyze.sh는 missing_dependency 오류를 내고 설치 안내는 'brew install jq'(macOS용)다. Windows Git Bash에서 정적 분석 경로를 시험하려면 jq 설치가 선행되어야 할 수 있다.",
+    "라이브 감사 경로(lighthouse_audit, performance_start_trace)는 Chrome DevTools MCP가 필요하다고 README가 설명한다. 이 통합은 선택 사항이며 없으면 Lighthouse CLI 등으로 대체된다. 그 대체 경로는 npx로 외부 패키지를 받아 실행하므로 샌드박스에서도 네트워크와 npm 캐시를 건드린다.",
+    "accessibility SKILL.md의 예시 명령에는 npm install @axe-core/cli -g(전역 설치)가 있다. 시험 중 Claude가 이를 제안하면 승인 여부를 사람이 정해야 한다. 전역 설치는 샌드박스 밖(사용자 환경)에 남는다.",
+    "여섯 Skill의 trigger 문구가 서로 겹치는 부분이 있다(예: 'optimize my website', 'check page quality'는 web-quality-audit, 'speed up my site'는 performance). 어느 Skill이 발동했는지는 시험 중 로그로 확인해야 한다. 이 PC에는 이름이 비슷한 다른 Skill이 이미 설치되어 있을 수 있어 발동 구분이 필요하다(미확인).",
+    "마켓플레이스 설치(/plugin)와 npx skills add 설치는 서로 다른 경로이며 중복 설치되면 Skill이 두 번 보일 수 있다(추정). 한 가지 방법만 쓴다.",
+    "npx skills add / npx add-skill은 서드파티 CLI 패키지를 내려받아 실행한다. 어떤 패키지이고 누가 관리하는지는 확인하지 않았다. 안전한 쪽을 택한다면 /plugin 또는 폴더 복사가 낫다(판단).",
+    "GitHub 릴리스·태그가 없어 '어느 버전'을 시험했는지 표기하려면 plugin.json 버전(2.0.0)과 커밋 해시(afa8da9...)를 함께 기록해야 한다. 2026-10-15 기준 main이 2026-08-24 이후 바뀌었는지는 시험 직전에 다시 확인한다.",
+    "이름 충돌: 같은 이름의 외부 복사본·미러가 존재한다(스타 0). 설치 시 addyosmani/web-quality-skills인지 정확히 확인한다. 다른 마켓플레이스에 같은 플러그인이 등재됐는지는 확인하지 못했다.",
+    "저장소는 비공식(unofficial) 서드파티이며 Anthropic·Google 공식 제품이 아니다. Lighthouse와 Chrome DevTools MCP의 동작은 각 도구의 버전에 따라 달라질 수 있다(SKILL.md가 Lighthouse 13+ 기준임을 명시).",
+    "저장소 안의 CLAUDE.md·AGENTS.md는 그 저장소 기여자용 지침이다. 이 블로그 세션에서 따를 지시가 아니며, 샌드박스에서 해당 저장소를 clone해 열 경우 그 지침이 로드될 수 있으므로 clone 대신 /plugin 또는 필요한 폴더만 복사하는 편이 안전하다(판단).",
+    "시험 대상은 샌드박스 폴더의 정적 HTML이어야 한다. 블로그 저장소의 site/ 같은 파일에 Skill을 적용하면 수정 제안이 블로그 파일로 이어질 수 있다."
+  ],
+  "writing_notes": [
+    "스타 수 2,900+는 addyosmani/web-quality-skills 저장소의 2026-10-15 하한이다. 서드파티 디렉터리의 설치 수(약 54.8k)와 다른 저장소(agent-skills)의 수치는 쓰지 않는다.",
+    "'실제로 Lighthouse 점수가 올랐다' 같은 효과 주장은 직접 시험 전에는 쓰지 않는다. 이 저장소 자체가 근거 없는 개선 수치를 제거했다고 CHANGELOG에 밝히고 있으므로, 글에서도 측정 근거 없이 개선율을 쓰지 않는다.",
+    "'API 키가 필요 없다'고 단정하지 않는다. 확인한 범위는 'README·SKILL.md·analyze.sh에 키 관련 문구 없음'뿐이다. 대체 경로의 PageSpeed Insights/CrUX는 외부 서비스이며 직접 CrUX API는 키가 있을 때 쓰는 경로로 문서에 적혀 있다.",
+    "'Skill이 자동으로 npx lighthouse를 실행한다'고 쓰지 않는다. 문서에 예시 명령이 있을 뿐이며 실제 실행 여부는 사람이 시험에서 관찰해야 한다.",
+    "analyze.sh는 '읽기 전용이라고 스스로 밝힘 + 읽어 본 코드가 grep·find·jq만 사용'이라는 범위로만 쓴다. 실행 결과는 hands_on 관찰 후에 쓴다.",
+    "Chrome DevTools MCP의 도구 이름과 동작은 이 조사에서 원문 대조를 하지 않았으므로 글에서는 'README가 이렇게 설명한다'고 출처를 밝혀서 쓴다.",
+    "hands_on_test는 만들지 않았다. 설치 로그, 발동한 Skill, 실제 출력은 사람이 시험한 뒤 /blog-record로 채운다."
+  ]
+}
