@@ -1,0 +1,175 @@
+{
+  "slug": "web-quality-skills-review",
+  "checked_at": "2026-10-15",
+  "verdict": "WARNING",
+  "run": 1,
+  "rounds": "1회차 검사 후 자동 수정 1회, 변경 문장 재검사 1회. FAIL 0건.",
+  "claims_checked": 13,
+  "method": [
+    "초안의 사실 문장을 data/research/addyosmani-web-quality-skills.json의 claims와 대조했고, 외부 출처 클레임 12건을 claim-verifier(sonnet) 12개에 병렬로 맡겼다. 판정 기준은 verifier가 reference/rubric.md를 직접 읽었다.",
+    "'없다/언급 없음' 주장(API 키·토큰·시크릿·자격증명 문구, telemetry)은 verifier가 아니라 직접 curl로 main의 파일 11개를 받아 grep -ciE로 확인했다. 파일: README.md, SKILL.md 6개, analyze.sh, CHANGELOG.md, CLAUDE.md, AGENTS.md. api[_ -]?key, token, secret, credential 일치 0개. telemetry는 performance SKILL.md에서 1개. references/ 하위 문서는 포함하지 않았고 초안도 그렇게 밝혔다.",
+    "analyze.sh의 줄 수는 curl로 받은 파일에 wc -l을 실행해 113을 직접 확인했다(verifier의 WebFetch는 줄 수를 정확히 세지 못했다고 보고).",
+    "hands_on_test에서 나온 문장(실전 테스트 서술)은 외부 출처 대조 대상이 아니라 hands_on_test.observations 14건 및 environment_info와 대조했다.",
+    "1회차 후 표현 문제를 초안에서 고치고(아래 auto_fixed), 바뀐 외부 사실 문장 3건을 verifier로 재검사했다."
+  ],
+  "results": [
+    {
+      "claim": "저장소 수치: 2,900+ 스타, 250+ 포크, 생성 2026-01-18, 마지막 push 2026-08-24, 보관 아님",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills",
+      "verdict": "PASS",
+      "evidence": "stargazers_count 2945, forks_count 256, created_at 2026-01-18, pushed_at 2026-08-24, archived false. 문턱값 클레임이고 실측치가 문턱 위."
+    },
+    {
+      "claim": "GitHub 릴리스와 태그 없음, 버전 2.0.0은 plugin.json",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills/releases",
+      "verdict": "PASS",
+      "evidence": "releases·tags API 모두 빈 배열. plugin.json version 2.0.0."
+    },
+    {
+      "claim": "CHANGELOG 2.0.0 설명",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/CHANGELOG.md",
+      "verdict": "PASS",
+      "evidence": "증거 기반 감사로의 전환, 트레이스·라이브 Lighthouse 우선, 근거 없는 순위 퍼센트와 절감 추정치 제거, v1과의 이름·트리거 호환 모두 원문과 일치."
+    },
+    {
+      "claim": "파일 트리: skills/ 아래 6개 폴더, 일부 references, 스크립트는 analyze.sh 하나",
+      "source_url": "https://api.github.com/repos/addyosmani/web-quality-skills/git/trees/main?recursive=1",
+      "verdict": "WARNING",
+      "evidence": "전체 트리 51개 항목(truncated false)에서 내용이 일치한다. 스크립트 확장자 파일은 skills/web-quality-audit/scripts/analyze.sh 하나. 경고 사유는 source_kind(API 트리 목록인데 github_readme로 표기)뿐이며, 초안의 '처음 60개만 읽었다' 문구는 자동 수정으로 '전체 트리 51개 항목'으로 바꿨고 재검사에서도 같은 사유로 WARNING.",
+      "recheck": "2회차: 내용 PASS, source_kind 라벨 WARNING"
+    },
+    {
+      "claim": "마켓플레이스 매니페스트: 마켓플레이스 addy-web-quality-skills, 플러그인 web-quality-skills",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/.claude-plugin/marketplace.json",
+      "verdict": "PASS",
+      "evidence": "최상위 name addy-web-quality-skills, plugins[0].name web-quality-skills."
+    },
+    {
+      "claim": "README의 Claude Code 설치 명령, 다른 설치 경로, unofficial·measurement-first, Codex·Gemini 설치",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/README.md",
+      "verdict": "PASS",
+      "evidence": "두 Claude Code 명령, npx skills add, npx add-skill, cp -r skills/* ~/.claude/skills/, 'An (unofficial) measurement-first collection', Codex·Gemini 설치 절이 모두 있다."
+    },
+    {
+      "claim": "라이선스가 README·plugin.json·SKILL.md 6개·GitHub 메타데이터에서 MIT, LICENSE 파일은 'MIT License'와 2026 Addy Osmani 저작권으로 시작",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/LICENSE",
+      "verdict": "PASS",
+      "evidence": "다섯 출처 모두 MIT로 일치. 6개 SKILL.md front matter에 license: MIT."
+    },
+    {
+      "claim": "도구 라우팅: DevTools MCP 우선, 대체 경로, DevTools 통합은 선택, analyze.sh는 스모크 테스트, 직접 CrUX API는 키가 있을 때, Lighthouse 13",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/web-quality-audit/SKILL.md",
+      "verdict": "WARNING",
+      "evidence": "6개 하위 항목 중 5개 PASS. 초안의 'Lighthouse 13 이상을 따른다'는 원문('Lighthouse 13+' 알림, 성능 카테고리가 공유 Performance Insights를 쓴다는 내용)보다 강한 표현이라 WARNING. 자동 수정으로 원문 그대로의 내용으로 바꿨고 재검사에서 PASS.",
+      "recheck": "2회차: PASS"
+    },
+    {
+      "claim": "analyze.sh: 113줄, 읽기 전용 주석, grep·find·jq만 사용, 검사 항목, jq 없으면 missing_dependency와 brew install jq 안내",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/web-quality-audit/scripts/analyze.sh",
+      "verdict": "WARNING",
+      "evidence": "내용은 모두 일치(2행 주석, 24~25행 jq 검사). verifier는 WebFetch로 줄 수를 정확히 세지 못했지만 직접 wc -l로 113을 확인했다. 남은 사유는 source_kind(셸 스크립트인데 github_readme)뿐이다. main 브랜치는 가변이라 줄 수가 바뀔 수 있고 초안은 'on the current main branch'로 한정했다."
+    },
+    {
+      "claim": "accessibility SKILL.md의 예시 명령: npx lighthouse https://example.com --only-categories=accessibility, npm install @axe-core/cli -g",
+      "source_url": "https://raw.githubusercontent.com/addyosmani/web-quality-skills/main/skills/accessibility/SKILL.md",
+      "verdict": "PASS",
+      "evidence": "자동 테스트 절에 두 명령이 그대로 있다."
+    },
+    {
+      "claim": "동명 복사본: RUSHYOP/mirror-addyosmani-web-quality-skills, costrict-plugins-repo/github-trending-web-quality-skills, 둘 다 스타 0",
+      "source_url": "https://api.github.com/search/repositories?q=web-quality-skills+in:name",
+      "verdict": "PASS",
+      "evidence": "1회차 WARNING: costrict 저장소의 설명이 이 프로젝트를 가리키지 않아 '복사본'이라는 단정이 과했다. 자동 수정 후 재검사 PASS: RUSHYOP은 설명에 addyosmani 저장소를 원본으로 적었고, costrict는 비슷한 이름 프로젝트의 자동 생성 미러라고 적혀 있어 초안이 그렇게 한정했다. 둘 다 스타 0.",
+      "recheck": "2회차: PASS"
+    },
+    {
+      "claim": "제3자 목록 사이트 agentskillsfinder.com이 같은 작성자의 별도 저장소 addyosmani/agent-skills의 code-review Skill을 소개",
+      "source_url": "https://agentskillsfinder.com/skills/code-review-and-quality",
+      "verdict": "PASS",
+      "evidence": "페이지가 addyosmani를 작성자로 적고 github.com/addyosmani/agent-skills를 링크한다. 저장소가 실제로 존재한다. 1회차 검사 전에 초안 문장을 '내가 열어 보지 않았다'에서 '이 프로젝트는 검토하지 않았다'로 바꿨다."
+    },
+    {
+      "claim": "README·SKILL.md 6개·analyze.sh·CHANGELOG·CLAUDE.md·AGENTS.md에 API 키·토큰·시크릿·자격증명 문구 없음, telemetry는 performance SKILL.md에 1개(운영 계측 설명)",
+      "source_url": "https://github.com/addyosmani/web-quality-skills",
+      "verdict": "PASS",
+      "evidence": "curl로 main의 파일 11개를 받아 grep -ciE로 각 용어를 확인: api[_ -]?key 0, token 0, secret 0, credential 0, telemetry 1(performance.md). 초안은 references/ 미검색, '언급 없음 ≠ 필요 없음', 외부 도구(Lighthouse, PSI)는 확인하지 않았다고 한정."
+    }
+  ],
+  "hands_on_sentence_checks": [
+    {
+      "sentence": "설치 화면 문구와 설치 성공",
+      "verdict": "PASS",
+      "evidence": "관찰 1~2: 'Successfully added marketplace: addy-web-quality-skills', '✓ Installed web-quality-skills. Plugin is now active.'"
+    },
+    {
+      "sentence": "시험 1~3의 발동 Skill, 수정 여부, 보고 내용",
+      "verdict": "PASS",
+      "evidence": "관찰 4~13과 맞다. 시험 3의 수정(Write, 6줄 추가 3줄 삭제)과 수정 전 확인 질문이 화면에 없었다는 서술도 관찰 11과 같다."
+    },
+    {
+      "sentence": "설치본과 main의 일치(줄 끝 CR 제외), references/ 미비교",
+      "verdict": "PASS",
+      "evidence": "environment_info 4번째 항목과 같다."
+    },
+    {
+      "sentence": "글자색 대비 1.9:1과 권장색 4.54:1, 시험 후 재계산 1.92:1·4.54:1",
+      "verdict": "PASS",
+      "evidence": "관찰 6."
+    },
+    {
+      "sentence": "1회 관찰 한정, 일반화 금지, analyze.sh 미실행 관찰과 그 이유는 추정",
+      "verdict": "PASS",
+      "evidence": "inferred_not_confirmed, unverified와 같다. 초안은 '건너뛰었는지, 보이지 않는 곳에서 실행됐는지, Claude가 HTML을 직접 읽어서 필요 없었는지'를 모른다고 쓰고 마지막은 추측이라고 밝혔다."
+    }
+  ],
+  "auto_fixed": [
+    "요약: 시험 3의 'edited my file without asking first' → 'with no question on screen first' (관찰 11: 확인 질문이 화면에 없었다)",
+    "동명 복사본: costrict 저장소를 '복사본'으로 단정한 문장을 설명 그대로로 한정",
+    "agent-skills: 'I did not open that listing' → 'different project, I did not review it' (verifier가 목록과 저장소를 확인함)",
+    "Key features: '처음 60개 항목만 읽었다' → '전체 트리 51개 항목', 경로를 skills/web-quality-audit/scripts/analyze.sh 전체 경로로",
+    "Installation: 'npx 두 명령이 별도 CLI를 내려받는다'를 README가 add-skill을 별도 CLI로 설명한다는 서술로 한정",
+    "Automation ideas: Test 2에는 '고치지 말라'고 말하지 않았는데 'report only 지시'로 묶은 문장을 분리",
+    "Pros: '두 번이 report only를 따랐다'와 'none claimed a speedup'(관찰 근거 없음)을 관찰 범위 안의 문장으로 교체",
+    "Watch-outs: brew install jq를 'macOS 명령' → 'Homebrew 명령', npx·전역 설치 문장을 문서에 있는 내용으로 한정, Lighthouse 13 문구를 원문대로, 'not an Anthropic or Google product' → README가 unofficial이라 한다는 서술로",
+    "FAQ: 공식 도구 여부를 'No' 단정에서 README 서술로"
+  ],
+  "unsourced_statements": [],
+  "human_review_warnings": [
+    {
+      "id": 1,
+      "issue": "source_kind 분류: 조사 JSON에서 GitHub API 응답(저장소 메타데이터, 파일 트리, 검색 결과)과 셸 스크립트·SKILL.md가 github_readme로 표기돼 있다. 허용 값 중 딱 맞는 것이 없다.",
+      "type": "source_kind 분류 문제, 조사 JSON 변경이 필요할 수 있어 사람 판단",
+      "recommend": "수용 권고. 글의 오류가 아니라 조사 파일의 분류 문제이고 hookify·memory 글에서도 같은 사유로 수용했다.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-16"
+    },
+    {
+      "id": 2,
+      "issue": "초안 일부 서술이 조사 JSON claims보다 최신·구체적이다. 파일 트리가 51개 항목 전체였다는 것(JSON claim은 '앞쪽 60개까지 확인'), RUSHYOP·costrict 저장소의 설명 문구, Lighthouse 13+ 알림(JSON에서는 watch_outs에만 있음)이다. 값은 같은 날 verifier가 원본에서 다시 확인했다.",
+      "type": "조사 JSON claims 변경이 필요한 것, 이 명령은 JSON claims를 고치지 않는다",
+      "recommend": "수용 권고. 값이 원본과 일치하고 변동 가능성이 낮다. 필요하면 나중에 /blog-research로 claims를 갱신한다.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-16"
+    },
+    {
+      "id": 3,
+      "issue": "범위 문장: 6개 Skill 중 3개, Claude Code 플러그인 경로, DevTools MCP 미사용, 관찰은 사용자 메모(화면 캡처 6장 기반)이며 캡처 원본은 기록 작성 시 받지 못했다. 시험 프롬프트를 한국어로 입력했다는 서술도 메모의 한국어 인용에서 나온 것이다.",
+      "type": "범위 문장, 작성자 진술",
+      "recommend": "수용 권고. 조사 범위를 밝히는 문장이다. 다만 사람이 캡처와 한 번 대조하면 더 확실하다.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-16"
+    },
+    {
+      "id": 4,
+      "issue": "analyze.sh 줄 수(113)와 main 브랜치 기준 서술은 main이 바뀌면 틀어질 수 있다.",
+      "type": "외부 사실이 바뀔 수 있는 것",
+      "recommend": "수용 권고. 초안이 'current main branch'로 한정하고 설치본과 같다는 비교를 함께 적었다.",
+      "human_decision": "accepted",
+      "decided_by": "사용자",
+      "decided_at": "2026-10-16"
+    }
+  ]
+}
